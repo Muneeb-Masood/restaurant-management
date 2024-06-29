@@ -1,3 +1,13 @@
+let btn = document.getElementById("chefAnchorTag");
+console.log(btn);
+console.log("Muneeb Bhaia");
+btn.addEventListener(
+    "click",
+  ()=>{
+    window.location.href = "http://localhost:5500/src/chefs/chefs.html"
+  }
+)
+
 document.addEventListener('DOMContentLoaded', () => {
     const chefForm = document.getElementById('chef-form');
     const chefList = document.getElementById('chef-list');

@@ -1,3 +1,13 @@
+let btn = document.getElementById("billAnchorTag");
+console.log(btn);
+console.log("Muneeb Bhaia");
+btn.addEventListener(
+    "click",
+  ()=>{
+    window.location.href = "http://localhost:5500/src/bills/bills.html"
+  }
+)
+
 document.addEventListener('DOMContentLoaded', () => {
     const billForm = document.getElementById('bill-form');
     const billList = document.getElementById('bill-list');

@@ -491,3 +491,55 @@
 
 
 
+#customer-section {
+  width: 300px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+}
+
+#customer-section h2 {
+  text-align: center;
+  color: #333;
+}
+
+#customer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#customer-form input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+#customer-form button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #5cb85c;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#customer-form button:hover {
+  background-color: #4cae4c;
+}
+
+#customer-list {
+  margin-top: 20px;
+  list-style-type: none;
+  padding: 0;
+}
+
+#customer-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}

@@ -27,15 +27,15 @@
         </a>
       </li>
       <li>
-        <a href="/">
+        <a href="#" id="userAnchorTag">
           <i class='bx bx-user'></i>
-          <span class="customer-btn">
+          <span class="links_name">
             Customers
           </span>
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="#" id="managerAnchorTag">
           <i class='bx bxs-truck'></i>
           <span class="links_name">
             Managers
@@ -43,7 +43,7 @@
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="#" id="waiterAnchorTag">
           <i class='bx bx-dollar' ></i>
           <span class="links_name">
             Waiters
@@ -51,7 +51,7 @@
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="#" id="chefAnchorTag">
           <i class='bx bxs-user-plus'></i>
           <span class="links_name">
             Chefs
@@ -60,7 +60,7 @@
       </li>
     
       <li>
-        <a href="#">
+        <a href="#" id="orderAnchorTag">
           <i class='bx bx-heart'></i>
           <span class="links_name">
             Orders
@@ -68,7 +68,7 @@
         </a>
       </li>
       <li>
-        <a href="#">
+        <a href="#" id="billAnchorTag">
           <i class='bx bx-cog'></i>
           <span class="links_name">
             Bills
@@ -250,81 +250,16 @@
             </tbody>
           </table>
         </div>
-        <div class="recent_customers">
-          <div class="card_header">
-            <h2>New Customers</h2>
-          </div>
-          <table>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="info_img">
-                    <img src="img/avatar-2.jpg" alt="">
-                  </div>
-                </td>
-                <td>
-                  <h4>Willams Harris</h4>
-                  <span>Willams@gmail.com</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="info_img">
-                    <img src="img/avatar-3.jpg" alt="">
-                  </div>
-                </td>
-                <td>
-                  <h4>Vanessa Tucker</h4>
-                  <span>Vanessa@gmail.com</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="info_img">
-                    <img src="img/avatar-4.jpg" alt="">
-                  </div>
-                </td>
-                <td>
-                  <h4>Sharon Lessma</h4>
-                  <span>Sharon@gmail.com</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="info_img">
-                    <img src="img/avatar-5.jpg" alt="">
-                  </div>
-                </td>
-                <td>
-                  <h4>Christina Mason</h4>
-                  <span>Christina@gmail.com</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="info_img">
-                    <img src="img/avatar-2.jpg" alt="">
-                  </div>
-                </td>
-                <td>
-                  <h4>Willams Harris</h4>
-                  <span>Willams@gmail.com</span>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <div class="info_img">
-                    <img src="img/avatar-3.jpg" alt="">
-                  </div>
-                </td>
-                <td>
-                  <h4>Sharon Lessma</h4>
-                  <span>Willams@gmail.com</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <div id="customer-section">
+          <h2>Customers</h2>
+          <form id="customer-form">
+              <input type="text" id="customer-name" placeholder="Name" required>
+              <input type="text" id="customer-address" placeholder="Address" required>
+              <input type="text" id="customer-contact" placeholder="Contact No" required>
+              <button type="submit">Add Customer</button>
+          </form>
+          <ul id="customer-list"></ul>
+      </div>
       </div>
    
   </section>
@@ -333,4 +268,5 @@
 </body>
 
 <script src="/src/index.js"></script>
+<script src="/src/customers/customers.js"></script>
 </html>

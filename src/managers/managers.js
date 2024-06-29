@@ -1,3 +1,13 @@
+let btn = document.getElementById("managerAnchorTag");
+console.log(btn);
+console.log("Muneeb Bhaia");
+btn.addEventListener(
+    "click",
+  ()=>{
+    window.location.href = "http://localhost:5500/src/mangers/mangers.html"
+  }
+)
+
 document.addEventListener('DOMContentLoaded', () => {
     const managerForm = document.getElementById('manager-form');
     const managerList = document.getElementById('manager-list');
