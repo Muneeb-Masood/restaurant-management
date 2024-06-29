@@ -8,14 +8,14 @@
   <link rel="stylesheet" href="styles.css">
   <!-- box icon -->
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="customers/customers.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="sidebar">
     <div class="logo_details">
       <i class='bx bx-code-alt'></i>
       <div class="logo_name">
-        End Dev
+        RMS
       </div>
     </div>
     <ul>
@@ -30,8 +30,8 @@
       <li>
         <a href="#">
           <i class='bx bx-user'></i>
-          <span class="links_name">
-            Profile
+          <span class="customer-btn">
+            Customers
           </span>
         </a>
       </li>
@@ -39,7 +39,7 @@
         <a href="#">
           <i class='bx bxs-truck'></i>
           <span class="links_name">
-            Sales
+            Managers
           </span>
         </a>
       </li>
@@ -47,7 +47,7 @@
         <a href="#">
           <i class='bx bx-dollar' ></i>
           <span class="links_name">
-            Earning
+            Waiters
           </span>
         </a>
       </li>
@@ -55,23 +55,16 @@
         <a href="#">
           <i class='bx bxs-user-plus'></i>
           <span class="links_name">
-            Visitors
+            Chefs
           </span>
         </a>
       </li>
-      <li>
-        <a href="#">
-          <i class='bx bx-cart-alt'></i>
-          <span class="links_name">
-            Order
-          </span>
-        </a>
-      </li>
+    
       <li>
         <a href="#">
           <i class='bx bx-heart'></i>
           <span class="links_name">
-            Saved
+            Orders
           </span>
         </a>
       </li>
@@ -79,18 +72,11 @@
         <a href="#">
           <i class='bx bx-cog'></i>
           <span class="links_name">
-            Setting
+            Bills
           </span>
         </a>
       </li>
-      <li class="login">
-        <a href="#">
-          <span class="links_name login_out">
-            Login Out
-          </span>
-          <i class='bx bx-log-out' id="log_out"></i>
-        </a>
-      </li>
+  
     </ul>
   </div>
   <!-- End Sideber -->
@@ -151,165 +137,8 @@
         <i class='bx bxs-cart-download'></i>
       </div>
     </div>
-    <!-- End Card Boxs -->
-    <!-- <div class="details">
-      <div class="recent_project">
-        <div class="card_header">
-          <h2>New Customers</h2>
-        </div>
-        <table>
-          <thead>
-            <tr>
-              <td>Customer Name</td>
-              <td>Hours</td>
-              <td>Priority</td>
-              <td>Members</td>
-            </tr>
-          </thead>
-           <tbody>
-            <tr>
-              <td>Dropbox Design System</td>
-              <td>34</td>
-              <td>
-                <span class="badge bg_worning">
-                  Meduim
-                </span>
-              </td>
-              <td>
-                <span class="img_group">
-                  <img src="img/avatar-2.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <img src="img/avatar-3.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <img src="img/avatar-4.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <span class="initial">+5</span>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Slack Team UI Design</td>
-              <td>47</td>
-              <td>
-                <span class="badge bg_danger">
-                  Higt
-                </span>
-              </td>
-              <td>
-                <span class="img_group">
-                  <img src="img/avatar-5.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <img src="img/avatar-2.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <img src="img/avatar-3.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <span class="initial">+5</span>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Github Satellite</td>
-              <td>120</td>
-              <td>
-                <span class="badge bg_info">
-                  Low
-                </span>
-              </td>
-              <td>
-                <span class="img_group">
-                  <img src="img/avatar-4.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <img src="img/avatar-5.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <img src="img/avatar-2.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <span class="initial">+1</span>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>3D character Moddelling</td>
-              <td>89</td>
-              <td>
-                <span class="badge bg_worning">
-                  Meduim
-                </span>
-              </td>
-              <td>
-                <span class="img_group">
-                  <img src="img/avatar-3.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <img src="img/avatar-4.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <img src="img/avatar-5.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <span class="initial">+5</span>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Web app Design System</td>
-              <td>108</td>
-              <td>
-                <span class="badge bg_seccuss">
-                  Track
-                </span>
-              </td>
-              <td>
-                <span class="img_group">
-                  <img src="img/avatar-2.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <img src="img/avatar-3.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <img src="img/avatar-4.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <span class="initial">+5</span>
-                </span>
-              </td>
-            </tr>
-            <tr>
-              <td>Github Event Design</td>
-              <td>120</td>
-              <td>
-                <span class="badge bg_info">
-                  Low
-                </span>
-              </td>
-              <td>
-                <span class="img_group">
-                  <img src="img/avatar-5.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <img src="img/avatar-2.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <img src="img/avatar-3.jpg" alt="">
-                </span>
-                <span class="img_group">
-                  <span class="initial">+1</span>
-                </span>
-              </td>
-            </tr>
-          </tbody> 
-        </table>
-      </div>
-    
-    </div> -->
+
+   
   </section>
 
   <script>

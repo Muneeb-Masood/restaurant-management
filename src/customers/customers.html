@@ -1,27 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="customers.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Admin & Dashboard</title>
+  <link rel="stylesheet" href="/src/styles.css">
+  <!-- box icon -->
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+  <div class="sidebar">
+    <div class="logo_details">
+      <i class='bx bx-code-alt'></i>
+      <div class="logo_name">
+        RMS
+      </div>
+    </div>
+    <ul>
+      <li>
+        <a href="#" class="active">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">
+            Dashboard
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="/">
+          <i class='bx bx-user'></i>
+          <span class="customer-btn">
+            Customers
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bxs-truck'></i>
+          <span class="links_name">
+            Managers
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-dollar' ></i>
+          <span class="links_name">
+            Waiters
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bxs-user-plus'></i>
+          <span class="links_name">
+            Chefs
+          </span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="#">
+          <i class='bx bx-heart'></i>
+          <span class="links_name">
+            Orders
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class='bx bx-cog'></i>
+          <span class="links_name">
+            Bills
+          </span>
+        </a>
+      </li>
+  
+    </ul>
+  </div>
+  <!-- End Sideber -->
+  <section class="home_section">
+    <div class="topbar">
+      <div class="toggle">
+        <i class='bx bx-menu' id="btn"></i>
+      </div>
+      <div class="system-name" >
+           <h1>RESTAURANT MANAGEMENT SYSTEM</h1>
+      </div>
+      <!-- <div class="user_wrapper">
+        <img src="img/user.jpg" alt="">
+      </div> -->
+    </div>
+    
+    <!-- End Top Bar -->
+  
     <div class="details">
         <div class="recent_project">
           <div class="card_header">
-            <h2>New Customers</h2>
+            <h2>Lastet Projects</h2>
           </div>
           <table>
             <thead>
               <tr>
-                <td>Customer Name</td>
+                <td>Project Name</td>
                 <td>Hours</td>
                 <td>Priority</td>
                 <td>Members</td>
               </tr>
             </thead>
-             <tbody>
+            <tbody>
               <tr>
                 <td>Dropbox Design System</td>
                 <td>34</td>
@@ -160,10 +247,90 @@
                   </span>
                 </td>
               </tr>
-            </tbody> 
+            </tbody>
           </table>
         </div>
-      
+        <div class="recent_customers">
+          <div class="card_header">
+            <h2>New Customers</h2>
+          </div>
+          <table>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="info_img">
+                    <img src="img/avatar-2.jpg" alt="">
+                  </div>
+                </td>
+                <td>
+                  <h4>Willams Harris</h4>
+                  <span>Willams@gmail.com</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="info_img">
+                    <img src="img/avatar-3.jpg" alt="">
+                  </div>
+                </td>
+                <td>
+                  <h4>Vanessa Tucker</h4>
+                  <span>Vanessa@gmail.com</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="info_img">
+                    <img src="img/avatar-4.jpg" alt="">
+                  </div>
+                </td>
+                <td>
+                  <h4>Sharon Lessma</h4>
+                  <span>Sharon@gmail.com</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="info_img">
+                    <img src="img/avatar-5.jpg" alt="">
+                  </div>
+                </td>
+                <td>
+                  <h4>Christina Mason</h4>
+                  <span>Christina@gmail.com</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="info_img">
+                    <img src="img/avatar-2.jpg" alt="">
+                  </div>
+                </td>
+                <td>
+                  <h4>Willams Harris</h4>
+                  <span>Willams@gmail.com</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="info_img">
+                    <img src="img/avatar-3.jpg" alt="">
+                  </div>
+                </td>
+                <td>
+                  <h4>Sharon Lessma</h4>
+                  <span>Willams@gmail.com</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
+   
+  </section>
+
+ 
 </body>
+
+<script src="/src/index.js"></script>
 </html>
