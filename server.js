@@ -1,15 +1,21 @@
 const express = require('express');
 const mysql = require('mysql2');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
 const app = express();
 const port = 8000;
+
+
+app.use(cors());
+
 
 app.use(bodyParser.json());
 
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'algebric12',
+    password: 'muneeb12',
     database: 'restaurant_management'
 });
 
@@ -32,19 +38,32 @@ db.connect(err => {
 
 // CRUD operations for Customer
 app.get('/customers', (req, res) => {
+    console.log("Custumer k doara get request bheji gaie ha");
     const sql = 'SELECT * FROM Customer';
     db.query(sql, (err, results) => {
         if (err) throw err;
+        console.log("Result yai ha :" + results);
         res.send(results);
+
     });
 });
 
 app.post('/customers', (req, res) => {
+    console.log("Post ki request aie ha...");
     const { name, address, contactNo } = req.body;
     const sql = 'INSERT INTO Customer (Name, Address, ContactNo) VALUES (?, ?, ?)';
     db.query(sql, [name, address, contactNo], (err, result) => {
         if (err) throw err;
         res.send("Ok ki report ha");
+    });
+});
+
+app.post('/waiters', (req, res) => {
+    const { name , role ,email } = req.body;
+    const sql = 'INSERT INTO Waiter (Name , Role , Email) VALUES (? , ? , ?)';
+    db.query(sql, [name , role , email], (err, result) => {
+        if (err) throw err;
+        res.send(result);
     });
 });
 
@@ -67,7 +86,7 @@ app.delete('/customers/:id', (req, res) => {
 
 // CRUD operations for Order
 app.get('/orders', (req, res) => {
-    const sql = 'SELECT * FROM `Order`';
+    const sql = 'SELECT * FROM Order';
     db.query(sql, (err, results) => {
         if (err) throw err;
         res.send(results);
@@ -76,7 +95,7 @@ app.get('/orders', (req, res) => {
 
 app.post('/orders', (req, res) => {
     const { noOfItems, customerID } = req.body;
-    const sql = 'INSERT INTO `Order` (NoOfItems, CustomerID) VALUES (?, ?)';
+    const sql = 'INSERT INTO Order (NoOfItems, CustomerID) VALUES (?, ?)';
     db.query(sql, [noOfItems, customerID], (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -85,7 +104,7 @@ app.post('/orders', (req, res) => {
 
 app.put('/orders/:id', (req, res) => {
     const { noOfItems, customerID } = req.body;
-    const sql = 'UPDATE `Order` SET NoOfItems = ?, CustomerID = ? WHERE OrderNo = ?';
+    const sql = 'UPDATE Order SET NoOfItems = ?, CustomerID = ? WHERE OrderNo = ?';
     db.query(sql, [noOfItems, customerID, req.params.id], (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -93,7 +112,7 @@ app.put('/orders/:id', (req, res) => {
 });
 
 app.delete('/orders/:id', (req, res) => {
-    const sql = 'DELETE FROM `Order` WHERE OrderNo = ?';
+    const sql = 'DELETE FROM Order WHERE OrderNo = ?';
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -179,14 +198,7 @@ app.get('/waiters', (req, res) => {
     });
 });
 
-app.post('/waiters', (req, res) => {
-    const { name } = req.body;
-    const sql = 'INSERT INTO Waiter (Name) VALUES (?)';
-    db.query(sql, [name], (err, result) => {
-        if (err) throw err;
-        res.send(result);
-    });
-});
+
 
 app.put('/waiters/:id', (req, res) => {
     const { name } = req.body;
@@ -215,9 +227,9 @@ app.get('/chefs', (req, res) => {
 });
 
 app.post('/chefs', (req, res) => {
-    const { name } = req.body;
-    const sql = 'INSERT INTO Chef (Name) VALUES (?)';
-    db.query(sql, [name], (err, result) => {
+    const { name  , role , email} = req.body;
+    const sql = 'INSERT INTO Chef (Name , Role , Email) VALUES (? , ? , ?)';
+    db.query(sql, [name , role , email], (err, result) => {
         if (err) throw err;
         res.send(result);
     });
@@ -241,5 +253,5 @@ app.delete('/chefs/:id', (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server started on port ${port}`);
+    console.log("Server started on port" +  "${port}");
 });

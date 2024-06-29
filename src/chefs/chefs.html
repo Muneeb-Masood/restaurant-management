@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Admin & Dashboard</title>
+  <link rel="stylesheet" href="/src/styles.css">
+  <!-- box icon -->
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo_details">
+      <i class='bx bx-code-alt'></i>
+      <div class="logo_name">
+        RMS
+      </div>
+    </div>
+    <ul>
+      <li>
+        <a href="#" class="active">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">
+            Dashboard
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" id="userAnchorTag">
+          <i class='bx bx-user'></i>
+          <span class="links_name">
+            Customers
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" id="managerAnchorTag">
+          <i class='bx bxs-truck'></i>
+          <span class="links_name">
+            Managers
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" id="chefAnchorTag">
+          <i class='bx bx-dollar' ></i>
+          <span class="links_name">
+Chefs          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" id="chefAnchorTag">
+          <i class='bx bxs-user-plus'></i>
+          <span class="links_name">
+            Chefs
+          </span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" id="orderAnchorTag">
+          <i class='bx bx-heart'></i>
+          <span class="links_name">
+            Orders
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" id="billAnchorTag">
+          <i class='bx bx-cog'></i>
+          <span class="links_name">
+            Bills
+          </span>
+        </a>
+      </li>
+  
+    </ul>
+  </div>
+  <!-- End Sideber -->
+  <section class="home_section">
+    <div class="topbar">
+      <div class="toggle">
+        <i class='bx bx-menu' id="btn"></i>
+      </div>
+      <div class="system-name" >
+           <h1>RESTAURANT MANAGEMENT SYSTEM</h1>
+      </div>
+      <!-- <div class="user_wrapper">
+        <img src="img/user.jpg" alt="">
+      </div> -->
+    </div>
+    
+    <!-- End Top Bar -->
+  
+    <div class="details">
+        <div class="recent_project">
+          <div class="card_header">
+            <h2>Lastet Projects</h2>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <td>Chef Name</td>
+                <td>Specialist Of</td>
+                <td>Email</td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody>
+              
+            
+            </tbody>
+          </table>
+        </div>
+        <div id="customer-section">
+          <h2>Chefs</h2>
+          <form id="customer-form">
+              <input type="text" id="chef-name" placeholder="Name" required>
+              <input type="text" id="chef-role" placeholder="Role" required>
+              <input type="text" id="chef-email" placeholder="Email" required>
+              <button type="submit" id="addChef">Add Chef</button>
+          </form>
+          <ul id="chef-list"></ul>
+      </div>
+      </div>
+   
+  </section>
+
+ 
+</body>
+
+<script src="/src/index.js"></script>
+<script src="/src/chefs/chefs.js"></script>
+</html>
