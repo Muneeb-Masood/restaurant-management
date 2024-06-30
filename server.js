@@ -130,16 +130,16 @@ app.get('/order', (req, res) => {
 });
 
 app.post('/order', (req, res) => {
-    const { customerID, totalAmount, paymentStatus, price } = req.body;
-    const sql = 'INSERT INTO Orders (CustomerID, TotalAmount, PaymentStatus, Price , Location) VALUES (?, ?, ?, ?)';
+    const { customerID,  paymentStatus, price , location } = req.body;
+    const sql = 'INSERT INTO Orders (CustomerID, PaymentStatus, Price , location) VALUES (?, ?, ?, ?)';
    try{
-    db.query(sql, [customerID, totalAmount, paymentStatus, price , Location], (err, result) => {
+    db.query(sql, [customerID, paymentStatus, price , location], (err, result) => {
         if (err) {
             console.error('Error inserting order:', err);
-            res.status(500).send('Error inserting order');
+            res.status(500).send(false);
         } else {
             console.log('Order added successfully');
-            res.status(200).send('Order added successfully');
+            res.status(200).send(true);
         }
     });
    }

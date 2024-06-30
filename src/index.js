@@ -73,3 +73,27 @@ btn6.addEventListener(
   window.location.href = "http://localhost:5501/src/sales/sales.html"
 }
 )
+
+
+
+let btn7 = document.getElementById("billAnchorTag");
+console.log(btn);
+console.log("Muneeb Bhaia");
+btn7.addEventListener(
+  "click",
+()=>{
+  window.location.href = "http://localhost:5501/src/bills/bills.html"
+}
+)
+
+
+
+let btn8 = document.getElementById("menuAnchorTag");
+console.log(btn);
+console.log("Muneeb Bhaia");
+btn8.addEventListener(
+  "click",
+()=>{
+  window.location.href = "http://localhost:5501/src/menus/menus.html"
+}
+)

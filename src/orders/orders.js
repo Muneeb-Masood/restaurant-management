@@ -123,7 +123,7 @@ let addOrder = document.getElementById("addOrder");
 addOrder.addEventListener('click', function(){
   console.log("Button press hoa ha  addOrder ka");
   let customerID = document.getElementById('customer-id').value;
-  let orderStatus = document.getElementById('order-status').value;
+  // let orderStatus = document.getElementById('order-status').value;
   let paymentStatus = document.getElementById('payment-status').value;
   let price = document.getElementById('price').value;
   let location = document.getElementById('location').value;
@@ -132,13 +132,19 @@ addOrder.addEventListener('click', function(){
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({customerID , orderStatus , paymentStatus , price , location })
+    body: JSON.stringify({customerID , paymentStatus , price , location })
   })
-  .then(response => response.json())
-  .then(data => {
- 
-    alert("Order added successfully");
-  })
+  .then(response =>     {
+    console.log(response);
+    if(response == true){
+      alert("Order added successfully")
+    }
+    else{
+      alert("Error in adding order")
+    }
+  }
+)
+  
   .catch(error => {
     alert("This Customer is new so first add Customers Details");
     window.location.href = "http://localhost:5501/src/customers/customers.html"

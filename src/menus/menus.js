@@ -48,9 +48,9 @@ document.addEventListener('DOMContentLoaded', () => {
           
           tr.appendChild(td3);
           
+          tr.appendChild(td6);
           tr.appendChild(td4);
           
-          tr.appendChild(td6);
         
           td4.addEventListener(
             'click' , ()=>{
