@@ -1,6 +1,3 @@
-
-
-
 let responseData;
 document.addEventListener('DOMContentLoaded', () => {
   

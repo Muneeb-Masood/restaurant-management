@@ -86,34 +86,42 @@ app.delete('/customers/:id', (req, res) => {
 });
 
 // CRUD operations for Order
-app.get('/orders', (req, res) => {
-    const sql = 'SELECT * FROM Order';
+app.get('/order', (req, res) => {
+    const sql = 'SELECT * FROM Orders';
     db.query(sql, (err, results) => {
-        if (err) throw err;
-        res.send(results);
+        try{
+            if (err){
+                throw err;
+            }
+            res.send(results);
+        }
+        catch(e){
+            console.log("Error ha connection mai");
+            console.log(e);
+        }
     });
 });
 
-app.post('/orders', (req, res) => {
+app.post('/order', (req, res) => {
     const { noOfItems, customerID } = req.body;
-    const sql = 'INSERT INTO Order (NoOfItems, CustomerID) VALUES (?, ?)';
+    const sql = 'INSERT INTO Orders (NoOfItems, CustomerID) VALUES (?, ?)';
     db.query(sql, [noOfItems, customerID], (err, result) => {
         if (err) throw err;
         res.send(result);
     });
 });
 
-app.put('/orders/:id', (req, res) => {
+app.put('/order/:id', (req, res) => {
     const { noOfItems, customerID } = req.body;
-    const sql = 'UPDATE Order SET NoOfItems = ?, CustomerID = ? WHERE OrderNo = ?';
+    const sql = 'UPDATE Orders SET NoOfItems = ?, CustomerID = ? WHERE OrderNo = ?';
     db.query(sql, [noOfItems, customerID, req.params.id], (err, result) => {
         if (err) throw err;
         res.send(result);
     });
 });
 
-app.delete('/orders/:id', (req, res) => {
-    const sql = 'DELETE FROM Order WHERE OrderNo = ?';
+app.delete('/order/:id', (req, res) => {
+    const sql = 'DELETE FROM Orders WHERE OrderNo = ?';
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
         res.send(result);
@@ -316,8 +324,11 @@ app.get('/feedback-stats', (req, res) => {
   });
   
 
+ 
+
+
 
 
 app.listen(port, () => {
-    console.log("Server started on port" +  "${port}");
+    console.log("Server started on port " +  port);
 });
