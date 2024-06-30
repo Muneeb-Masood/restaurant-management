@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Bill Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .bill-list {
+            margin-bottom: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .bill-list th, .bill-list td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        .bill-list th {
+            background-color: #f2f2f2;
+        }
+        .bill-actions {
+            margin-top: 20px;
+        }
+        .btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Bill Management</h1>
+
+        <!-- Bill List -->
+        <table class="bill-list">
+            <thead>
+                <tr>
+                    <th>Bill ID</th>
+                    <th>Order ID</th>
+                    <th>Date</th>
+                    <th>Total Amount</th>
+                    <th>Payment Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="bill-table-body">
+                <!-- Bill rows will be dynamically added here -->
+            </tbody>
+        </table>
+
+        <!-- Bill Actions -->
+        <div class="bill-actions">
+            <button class="btn" onclick="showCreateForm()">Create New Bill</button>
+        </div>
+
+        <!-- Create Bill Form (hidden by default) -->
+        <div id="create-bill-form" style="display: none;">
+            <h2>Create New Bill</h2>
+            <form id="bill-form">
+                <div class="form-group">
+                    <label for="order-id">Order ID:</label>
+                    <input type="text" id="order-id" name="order_id" required>
+                </div>
+                <div class="form-group">
+                    <label for="total-amount">Total Amount:</label>
+                    <input type="number" id="total-amount" name="total_amount" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="payment-status">Payment Status:</label>
+                    <input type="text" id="payment-status" name="payment_status" required>
+                </div>
+                <button type="submit" class="btn">Create Bill</button>
+                <button type="button" class="btn" onclick="hideCreateForm()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Sample data for demonstration
+        const bills = [
+            { bill_id: 1, order_id: 101, date: '2024-06-30', total_amount: 50.25, payment_status: 'Paid' },
+            { bill_id: 2, order_id: 102, date: '2024-06-30', total_amount: 30.50, payment_status: 'Pending' },
+            { bill_id: 3, order_id: 103, date: '2024-06-29', total_amount: 45.75, payment_status: 'Paid' }
+        ];
+
+        // Function to render bills in the table
+        function renderBills() {
+            const tableBody = document.getElementById('bill-table-body');
+            tableBody.innerHTML = '';
+
+            bills.forEach(bill => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${bill.bill_id}</td>
+                    <td>${bill.order_id}</td>
+                    <td>${bill.date}</td>
+                    <td>$${bill.total_amount.toFixed(2)}</td>
+                    <td>${bill.payment_status}</td>
+                    <td>
+                        <button class="btn" onclick="editBill(${bill.bill_id})">Edit</button>
+                        <button class="btn" onclick="deleteBill(${bill.bill_id})">Delete</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Function to show the create bill form
+        function showCreateForm() {
+            document.getElementById('create-bill-form').style.display = 'block';
+        }
+
+        // Function to hide the create bill form
+        function hideCreateForm() {
+            document.getElementById('create-bill-form').style.display = 'none';
+        }
+
+        // Function to handle bill creation (dummy function for demonstration)
+        function createBill(event) {
+            event.preventDefault();
+            const form = document.getElementById('bill-form');
+            const formData = new FormData(form);
+            const newBill = {
+                bill_id: bills.length + 1,
+                order_id: formData.get('order_id'),
+                date: new Date().toISOString().split('T')[0],  // Today's date
+                total_amount: parseFloat(formData.get('total_amount')),
+                payment_status: formData.get('payment_status')
+            };
+            bills.push(newBill);
+            renderBills();
+            form.reset();
+            hideCreateForm();
+        }
+
+        // Dummy functions for edit and delete actions (for demonstration)
+        function editBill(billId) {
+            alert(`Edit bill with ID ${billId}`);
+        }
+
+        function deleteBill(billId) {
+            if (confirm(`Are you sure you want to delete bill with ID ${billId}?`)) {
+                bills = bills.filter(bill => bill.bill_id !== billId);
+                renderBills();
+            }
+        }
+
+        // Initial rendering of bills
+        renderBills();
+    </script>
+</body>
+</html>

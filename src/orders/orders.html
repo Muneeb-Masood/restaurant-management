@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Admin & Dashboard</title>
+  <title>Restaurant Management System - Orders</title>
   <link rel="stylesheet" href="/src/styles.css">
-  <!-- box icon -->
-  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="/src/orders/orders.css">
+  <!-- Chart.js library -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -87,33 +87,56 @@
         <h1>RESTAURANT MANAGEMENT SYSTEM</h1>
       </div>
     </div>
-    <!-- End Top Bar -->
     <div class="details">
-      <div class="recent_project">
-        <div class="card_header">
-          <h2>Last Projects</h2>
+      <div class="orders-container">
+        <h1>Orders Overview</h1>
+        <div class="charts-container">
+          <div class="chart">
+            <h2>Orders by Location</h2>
+            <canvas id="orderChart" width="400" height="300"></canvas>
+          </div>
+          <div class="chart">
+            <h2>Payment Status</h2>
+            <canvas id="paymentChart" width="400" height="300"></canvas>
+          </div>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <td>Project Name</td>
-              <td>Hours</td>
-              <td>Priority</td>
-              <td>Members</td>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+        <div id="statsContainer" class="stats-container">
+          <!-- Statistics will be dynamically populated by JavaScript -->
+        </div>
+        <div class="order-list">
+          <h2>Orders</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Order No</th>
+                <th>Customer ID</th>
+                <th>Order Status</th>
+                <th>Payment Status</th>
+                <th>Order Date</th>
+                <th>Price</th>
+                <th>Location</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </div>
+
       <div id="customer-section">
         <h2>Orders</h2>
-     
-        <canvas id="orderChart" width="400" height="400"></canvas>
-        <ul id="order-list"></ul>
-      </div>
+        <form id="customer-form">
+            <input type="text" id="customer-id" placeholder="Customer ID" required>
+            <input type="text" id="order-status" placeholder="Order Status" required>
+            <input type="text" id="payment-status" placeholder="Payment Status" required>
+            <input type="text" id="price" placeholder="Price" required>
+            <input type="text" id="location" placeholder="Location" required>
+            <button type="submit" id="addOrder">Add Order</button>
+        </form>
+        <ul id="customer-list"></ul>
+    </div>
     </div>
   </section>
+
   <script src="/src/orders/orders.js"></script>
-  <!-- <script src="/src/index.js"></script> -->
 </body>
 </html>

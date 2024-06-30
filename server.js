@@ -77,12 +77,39 @@ app.put('/customers/:id', (req, res) => {
 });
 
 app.delete('/customers/:id', (req, res) => {
-    const sql = 'DELETE FROM Customer WHERE ID = ?';
-    db.query(sql, [req.params.id], (err, result) => {
-        if (err) throw err;
+    const sq2 = 'DELETE FROM Orders WHERE CustomerID = ?';
+    const sq1 = 'DELETE FROM Customer WHERE ID = ?';
+   
+
+    try{
+        db.query(sq2, [req.params.id], (err, result) => {
         
-        res.send(result);
-    });
+            try{
+             if(err){
+                 throw err;
+     
+             }
+             db.query(sq1, [req.params.id], (err, result) => {
+                 if (err) throw err;
+                 res.send(result);
+             });
+            //  res.send(result);
+            
+     
+            }
+             catch(e){
+                 console.log("Error ha connection mai");
+                 console.log(e);
+             }
+             
+         });
+    }
+    catch(e){
+        db.query(sq1, [req.params.id], (err, result) => {
+            if (err) throw err;
+            res.send(result);
+        });
+    }
 });
 
 // CRUD operations for Order
@@ -103,13 +130,24 @@ app.get('/order', (req, res) => {
 });
 
 app.post('/order', (req, res) => {
-    const { noOfItems, customerID } = req.body;
-    const sql = 'INSERT INTO Orders (NoOfItems, CustomerID) VALUES (?, ?)';
-    db.query(sql, [noOfItems, customerID], (err, result) => {
-        if (err) throw err;
-        res.send(result);
+    const { customerID, totalAmount, paymentStatus, price } = req.body;
+    const sql = 'INSERT INTO Orders (CustomerID, TotalAmount, PaymentStatus, Price , Location) VALUES (?, ?, ?, ?)';
+   try{
+    db.query(sql, [customerID, totalAmount, paymentStatus, price , Location], (err, result) => {
+        if (err) {
+            console.error('Error inserting order:', err);
+            res.status(500).send('Error inserting order');
+        } else {
+            console.log('Order added successfully');
+            res.status(200).send('Order added successfully');
+        }
     });
+   }
+   catch(e){
+
+   }
 });
+
 
 app.put('/order/:id', (req, res) => {
     const { noOfItems, customerID } = req.body;
@@ -324,7 +362,47 @@ app.get('/feedback-stats', (req, res) => {
   });
   
 
- 
+  app.post('/menus', (req, res) => {
+    const { name, description, price, category } = req.body;
+    const sql = 'INSERT INTO Menu (Name, Description, Price, Category) VALUES (?, ?, ?, ?)';
+    db.query(sql, [name, description, price, category], (err, result) => {
+        if (err) {
+            console.error('Error adding menu item:', err);
+            res.status(500).send('Error adding menu item');
+        } else {
+            console.log('Menu item added successfully');
+            res.status(200).send('Menu item added successfully');
+        }
+    });
+});
+
+
+app.get('/menus', (req, res) => {
+    const sql = 'SELECT * FROM Menu';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Error fetching menu items:', err);
+            res.status(500).send('Error fetching menu items');
+        } else {
+            res.status(200).json(results);
+        }
+    });
+});
+
+
+app.delete('/menus/:itemId', (req, res) => {
+    const itemId = req.params.itemId;
+    const sql = 'DELETE FROM Menu WHERE ItemID = ?';
+    db.query(sql, itemId, (err, result) => {
+        if (err) {
+            console.error('Error deleting menu item:', err);
+            res.status(500).send('Error deleting menu item');
+        } else {
+            console.log(`Menu item with ItemID ${itemId} deleted successfully`);
+            res.status(200).send(`Menu item with ItemID ${itemId} deleted successfully`);
+        }
+    });
+});
 
 
 

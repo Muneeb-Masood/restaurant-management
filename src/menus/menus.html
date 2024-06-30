@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Responsive Admin & Dashboard</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="/src/styles.css">
   <!-- box icon -->
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="sidebar">
@@ -30,16 +30,16 @@
       <li>
         <a href="#" id="userAnchorTag">
           <i class='bx bx-user'></i>
-          <span class="customer-btn">
+          <span class="links_name">
             Customers
           </span>
         </a>
       </li>
       <li>
-        <a href="#" id="feedbackAnchorTag">
+        <a href="#" id="managerAnchorTag">
           <i class='bx bxs-truck'></i>
           <span class="links_name">
-            Feedbacks
+            Managers
           </span>
         </a>
       </li>
@@ -69,7 +69,7 @@
         </a>
       </li>
       <li>
-        <a href="#" id="billnchorTag">
+        <a href="#" id="billAnchorTag">
           <i class='bx bx-cog'></i>
           <span class="links_name">
             Bills
@@ -92,75 +92,70 @@
         <img src="img/user.jpg" alt="">
       </div> -->
     </div>
+    
     <!-- End Top Bar -->
-    <div class="card-boxes">
-      <div class="box">
-        <div class="right_side">
-          <div class="numbers">9.99</div>
-          <div class="box_topic">Total Orders</div>
+  
+    <div class="details">
+        <div class="recent_project">
+          <div class="card_header">
+            <h2>Lastet Projects</h2>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <td>Project Name</td>
+                <td>Hours</td>
+                <td>Priority</td>
+                <td>Members</td>
+              </tr>
+            </thead>
+            <tbody>
+              
+            
+            </tbody>
+          </table>
         </div>
-        <i class='bx bx-cart-alt'></i>
+        <div id="customer-section">
+          <h2>Menus</h2>
+          <form id="customer-form">
+            <input type="text" id="name" placeholder="Name" required>
+            <textarea id="description" placeholder="Description"></textarea>
+            <input type="number" id="price" placeholder="Price" step="10" required>
+            <input type="text" id="category" placeholder="Category">
+              <button type="submit" id="addMenu">Add Menu</button>
+          </form>
+          <ul id="menu-list"></ul>
       </div>
-      <div class="box">
-        <div class="right_side">
-          <div class="numbers">15.9</div>
-          <div class="box_topic">Total Waiters</div>
-        </div>
-        <i class='bx bxs-cart-add'></i>
       </div>
-      <div class="box">
-        <div class="right_side">
-          <div class="numbers">30.20</div>
-          <div class="box_topic">Total Chefs</div>
-        </div>
-        <i class='bx bx-cart'></i>
-      </div>
-      <div class="box">
-        <div class="right_side">
-          <div class="numbers">50.9</div>
-          <div class="box_topic">Total Managers</div>
-        </div>
-        <i class='bx bxs-cart-download'></i>
-      </div>
-      <div class="box">
-        <div class="right_side">
-          <div class="numbers">50.9</div>
-          <div class="box_topic">Total Managers</div>
-        </div>
-        <i class='bx bxs-cart-download'></i>
-      </div>
-      <div class="box">
-        <div class="right_side">
-          <div class="numbers">50.9</div>
-          <div class="box_topic">Total Customers</div>
-        </div>
-        <i class='bx bxs-cart-download'></i>
-      </div>
-    </div>
-
    
   </section>
 
-  <script>
-    let sidebar = document.querySelector(".sidebar");
-    let closeBtn = document.querySelector("#btn");
-
-    closeBtn.addEventListener("click", () => {
-      sidebar.classList.toggle("open");
-      // call function
-      changeBtn();
-    });
-
-    function changeBtn() {
-      if(sidebar.classList.contains("open")) {
-        closeBtn.classList.replace("bx-menu", "bx-menu-alt-right");
-      } else {
-        closeBtn.classList.replace("bx-menu-alt-right", "bx-menu");
-      }
-    }
-  </script>
-  <script src="index.js"></script>
-  <!-- <script src="customers/customers.js"></script> -->
  
 </body>
+
+<script src="/src/menus/menus.js"></script>
 </html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Management</title>
+    <link rel="stylesheet" href="menus.css">
+</head>
+<body>
+    <h1>Add New Menu Item</h1>
+    <form id="menuForm">
+        <input type="text" id="name" placeholder="Name" required>
+        <textarea id="description" placeholder="Description"></textarea>
+        <input type="number" id="price" placeholder="Price" step="0.01" required>
+        <input type="text" id="category" placeholder="Category">
+        <button type="submit">Add Menu Item</button>
+    </form>
+
+    <script src="menus.js"></script>
+</body>
+</html> -->

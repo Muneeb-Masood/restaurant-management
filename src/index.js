@@ -42,15 +42,15 @@ btn3.addEventListener(
 )
 
 
-let btn4 = document.getElementById("managerAnchorTag");
-console.log(btn);
-console.log("Muneeb Bhaia");
-btn4.addEventListener(
-  "click",
-()=>{
-  window.location.href = "http://localhost:5501/src/managers/managers.html"
-}
-)
+// let btn4 = document.getElementById("managerAnchorTag");
+// console.log(btn);
+// console.log("Muneeb Bhaia");
+// btn4.addEventListener(
+//   "click",
+// ()=>{
+//   window.location.href = "http://localhost:5501/src/managers/managers.html"
+// }
+// )
 
 
 let btn5 = document.getElementById("orderAnchorTag");

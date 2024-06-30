@@ -1,17 +1,8 @@
 let responseData;
 document.addEventListener('DOMContentLoaded', () => {
-  
-  // const customerForm = document.getElementById('customer-form');
-  // const customerList = document.getElementById('customer-list');
+ 
 
-  // customerForm.addEventListener('submit', (e) => {
-  //     e.preventDefault();
-  //     console.log("Button press hoa ha add customer ka");
-  //     const name = document.getElementById('customer-name').value;
-  //     const address = document.getElementById('customer-address').value;
-  //     const contactNo = document.getElementById('customer-contact').value;
-
-      fetch('http://localhost:8000/customers', {
+      fetch('http://localhost:8000/menus', {
           method: 'GET',
          
         
@@ -33,18 +24,22 @@ document.addEventListener('DOMContentLoaded', () => {
           let td3 = document.createElement('td');
           let td4 = document.createElement('td');
           let td5 = document.createElement('td');
+          let td6 = document.createElement('td');
           
           td1.innerHTML = data[i].Name;
           
           td2.innerHTML = 
-          data[i].Address;
+          data[i].Description;
           
           td3.innerHTML = 
-          data[i].ContactNo;
+          data[i].Price;
+
+
           
           td4.innerHTML = "<button>Delete</button>";
 
-          td5.innerHTML = data[i].ID;
+          td5.innerHTML = data[i].ItemID;
+          td6.innerHTML = data[i].Category;
           
           
           tr.appendChild(td1);
@@ -54,17 +49,19 @@ document.addEventListener('DOMContentLoaded', () => {
           tr.appendChild(td3);
           
           tr.appendChild(td4);
+          
+          tr.appendChild(td6);
         
           td4.addEventListener(
             'click' , ()=>{
               console.log(td1.innerHTML);
               confirm(
-                "Are you sure you want to delete this customer?"
+                "Are you sure you want to delete this Menu?"
               )
               
              if(confirm){
               fetch(
-                `http://localhost:8000/customers/${td5.innerHTML}`,
+                `http://localhost:8000/menus/${td5.innerHTML}`,
                 {
                   method: 'DELETE',
                   headers: {
@@ -72,13 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
                   }
                 }
               ).then(
-                response => response.json()
-                 .then(data => {
-                    alert("Customer deleted successfully with id " + data);
-                    
-                  })
+                response => alert(
+                    'Menu deleted successfully'
+  
+                )
+               
               ).catch(err => {
-              alert('Error from Cus.js:', err);
+              alert('Error from Menu.js:', err);
               });
              }
 
@@ -102,27 +99,25 @@ document.addEventListener('DOMContentLoaded', () => {
       .catch(error => console.log('Error ha bhayya in fetching the data:', error));
   });
 
-let addCustomer = document.getElementById("addCustomer");
+let addMenu = document.getElementById("addMenu");
 // console.log(responseData.length + " customers");
-addCustomer.addEventListener('click', function(){
-  console.log("Button press hoa ha add customer ka");
-  let name = document.getElementById('customer-name').value;
-  let address = document.getElementById('customer-address').value;
-  let contactNo = document.getElementById('customer-contact').value;
-  console.log(name, address, contactNo);
-  fetch('http://localhost:8000/customers', {
+addMenu.addEventListener('click', function(){
+  console.log("Button press hoa ha add menu ka");
+  let name = document.getElementById('name').value;
+  let description = document.getElementById('description').value;
+  let price = document.getElementById('price').value;
+  let category = document.getElementById('category').value;
+//   console.log(name, address, contactNo);
+  fetch('http://localhost:8000/menus', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ name, address, contactNo })
+    body: JSON.stringify({ name, description, price , category })
   })
-  .then(response => response.json())
-  .then(data => {
-    console.log("Length");
-    alert("Customer added successfully");
-  })
-  .catch(error => console.error('Error:', error))});
+  .then(response =>  alert("Menu added successfully"))
+ 
+  .catch(error => alert(error))});
 
 
 
