@@ -1,90 +1,114 @@
 
 
 
-let responseData;
 document.addEventListener('DOMContentLoaded', () => {
-  
-  // const customerForm = document.getElementById('customer-form');
-  // const customerList = document.getElementById('customer-list');
 
-  // customerForm.addEventListener('submit', (e) => {
-  //     e.preventDefault();
-  //     console.log("Button press hoa ha add customer ka");
-  //     const name = document.getElementById('customer-name').value;
-  //     const address = document.getElementById('customer-address').value;
-  //     const contactNo = document.getElementById('customer-contact').value;
+  let responseData;
 
-      fetch('http://localhost:8000/chefs', {
-          method: 'GET',
-         
-        
+  // Function to fetch and render chefs
+  function fetchAndRenderChefs() {
+      fetch('http://localhost:8000/chefs')
+          .then(response => response.json())
+          .then(data => {
+              responseData = data;
+              renderChefs(data);
+          })
+          .catch(error => console.error('Error fetching chefs:', error));
+  }
+
+  // Function to render chefs in table
+  function renderChefs(chefs) {
+      const tbody = document.querySelector('tbody');
+      tbody.innerHTML = ''; // Clear previous rows
+      chefs.forEach(chef => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+              <td>${chef.Name}</td>
+              <td>${chef.Role}</td>
+              <td>${chef.Email}</td>
+              <td><button class="delete-button" data-id="${chef.ID}">Delete</button></td>
+              <td><button class="update-button" data-id="${chef.ID}">Update</button></td>
+          `;
+          tbody.appendChild(tr);
+
+          // Attach event listener for delete button
+          tr.querySelector('.delete-button').addEventListener('click', () => {
+              deleteChef(chef.ID);
+          });
+
+          // Attach event listener for update button
+          tr.querySelector('.update-button').addEventListener('click', () => {
+              updateChef(chef);
+          });
+      });
+  }
+
+  // Function to handle delete chef
+  function deleteChef(chefID) {
+      fetch(`http://localhost:8000/chefs/${chefID}`, {
+          method: 'DELETE',
+          headers: {
+              'Content-Type': 'application/json'
+          }
       })
-      .then(
-        response => response.json())
-       .then(data => {
-        responseData = data;
-        for(var i = 0 ; i < responseData.length; i++) {
-  
-          let tr =  document.createElement(
-            'tr'
-          );
-          
-          let td1 = document.createElement('td');
-          
-          let td2 = document.createElement('td');
-          
-          let td3 = document.createElement('td');
-          let td4 = document.createElement('td');
-          
-          td1.innerHTML = data[i].Name;
-          
-          td2.innerHTML = 
-          data[i].Role;
-          
-          td3.innerHTML = 
-          data[i].Email;
-          
-          td4.innerHTML = "<button>Delete</button>";
-          td4.id = "deleteButton";
-          
-          
-          tr.appendChild(td1);
-          
-          tr.appendChild(td2);
-          
-          tr.appendChild(td3);
-          
-          tr.appendChild(td4);
-        
-          td4.addEventListener(
-            'click' , ()=>{
-              fetch(
-                `http://localhost:8000/chefs/${data[i].ID}`,
-                {
-                  method: 'DELETE',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  }
-                }
-              )
-            }
-          );
-          
-          
-          
-          
-          let tbody = document.getElementsByTagName("tbody");
-          
-          tbody[0].appendChild(tr);
-          
-          
-        }
-       }
-        
-      )
-     
-      .catch(error => console.log('Error ha bhayya in fetching the data:', error));
-  });
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Failed to delete chef');
+          }
+          return response.json();
+      })
+      .then(data => {
+          alert('Chef deleted successfully');
+          fetchAndRenderChefs(); // Refresh chefs after deletion
+      })
+      .catch(error => {
+          console.error('Error deleting chef:', error);
+          alert('Error deleting chef');
+      });
+  }
+
+  // Function to handle update chef
+  function updateChef(chef) {
+      const newName = prompt("Enter new name:", chef.Name);
+      const newRole = prompt("Enter new role:", chef.Role);
+      const newEmail = prompt("Enter new email:", chef.Email);
+
+      if (newName !== null && newRole !== null && newEmail !== null) {
+          const updatedChef = {
+              Name: newName,
+              Role: newRole,
+              Email: newEmail
+          };
+
+          fetch(`http://localhost:8000/chefs/${chef.ID}`, {
+              method: 'PUT',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(updatedChef)
+          })
+          .then(response => {
+              if (response == true) {
+                alert('Chef updated successfully');
+                fetchAndRenderChefs(); 
+              }
+
+              else{
+                alert('Error in updating chef');
+              }
+          })
+         
+          .catch(error => {
+              console.error('Error updating chef:', error);
+              alert('Error updating chef');
+          });
+      }
+  }
+
+  // Initial fetch and render on page load
+  fetchAndRenderChefs();
+});
+
 
 let addChef = document.getElementById("addChef");
 addChef.addEventListener('click', function(){

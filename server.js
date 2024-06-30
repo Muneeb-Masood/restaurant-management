@@ -283,11 +283,23 @@ app.post('/chefs', (req, res) => {
 });
 
 app.put('/chefs/:id', (req, res) => {
-    const { name } = req.body;
-    const sql = 'UPDATE Chef SET Name = ? WHERE ID = ?';
-    db.query(sql, [name, req.params.id], (err, result) => {
-        if (err) throw err;
-        res.send(result);
+    console.log("Baady", req.body);
+    const { Name , Role , Email } = req.body;
+    console.log("Name: " + Name);
+    console.log("Role: " + Role);
+    console.log("Email: " + Email);
+    const sql = 'UPDATE Chef SET Name = ? , Role = ? , Email = ? ,  WHERE ID = ?';
+    db.query(sql, [Name, Role , Email, req.params.id], (err, result) => {
+        try{
+            if(err){
+                throw err;
+            }
+            res.send(true);
+        }
+
+        catch(err){
+            res.send(false);
+        }
     });
 });
 
@@ -372,6 +384,20 @@ app.get('/feedback-stats', (req, res) => {
         } else {
             console.log('Menu item added successfully');
             res.status(200).send('Menu item added successfully');
+        }
+    });
+});
+
+
+app.put('/menus/:id', (req, res) => {
+    const { name, description, price, category } = req.body;
+    const sql = 'UPDATE Menu SET Name = ?, Description = ?, Price = ?, Category = ? WHERE ItemID = ?';
+    db.query(sql, [name, description, price, category, req.params.id], function(err) {
+        if (err) {
+            console.error('Error updating menu item:', err);
+            res.status(500).send(err.message);
+        } else {
+            res.json({ ItemID: req.params.id, name, description, price, category });
         }
     });
 });
