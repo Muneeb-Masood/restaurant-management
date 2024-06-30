@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Dashboard</title>
+    <link rel="stylesheet" href="sales.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</head>
+<body>
+    <header>
+        <h1>Sales Dashboard</h1>
+        <input type="date" id="startDate"> to <input type="date" id="endDate">
+    </header>
+    <section id="sales-summary">
+        <h2>Sales Summary</h2>
+        <p>Total Sales Today: $<span id="total-sales">0.00</span></p>
+        <p>Number of Transactions Today: <span id="total-transactions">0</span></p>
+        <p>Average Transaction Value: $<span id="avg-transaction-value">0.00</span></p>
+    </section>
+    <section id="sales-breakdown">
+        <h2>Sales Breakdown</h2>
+        <h3>By Category</h3>
+        <p>Food: $<span id="food-sales">0.00</span></p>
+        <p>Beverages: $<span id="beverage-sales">0.00</span></p>
+        <h3>Top-Selling Items</h3>
+        <ul id="top-items">
+            <!-- List items will be dynamically added here -->
+        </ul>
+    </section>
+    <section id="charts">
+        <h2>Sales Trends</h2>
+        <canvas id="sales-trends-chart"></canvas>
+        <h2>Top-Selling Items</h2>
+        <canvas id="top-items-chart"></canvas>
+    </section>
+    <section id="export">
+        <button id="export-btn">Export as CSV</button>
+    </section>
+    <script src="sales.js"></script>
+</body>
+</html>

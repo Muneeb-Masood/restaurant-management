@@ -80,6 +80,7 @@ app.delete('/customers/:id', (req, res) => {
     const sql = 'DELETE FROM Customer WHERE ID = ?';
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
+        
         res.send(result);
     });
 });
@@ -251,6 +252,71 @@ app.delete('/chefs/:id', (req, res) => {
         res.send(result);
     });
 });
+
+
+
+app.post('/login', (req, res) => {
+    const { email, password } = req.body;
+    const sql = 'SELECT * FROM Users WHERE email = ?';
+    
+    db.query(sql, [email], (err, results) => {
+        if (err) throw err;
+        
+        if (results.length > 0 && results[0].password === password) {
+            res.json({ success: true });
+        } else {
+            res.json({ success: false });
+        }
+    });
+});
+
+app.get('/api/sales', (req, res) => {
+    const sql = 'SELECT transaction_date, total_amount, transaction_count, avg_transaction_value, food_sales, beverage_sales FROM sales';
+    db.query(sql, (err, result) => {
+        if (err) {
+            throw err;
+        }
+        res.json(result);
+    });
+});
+
+
+app.get('/feedback-stats', (req, res) => {
+    const query = `
+      SELECT 
+        SUM(CASE WHEN rating >= 4 THEN 1 ELSE 0 END) AS positive_feedback,
+        SUM(CASE WHEN rating < 4 THEN 1 ELSE 0 END) AS negative_feedback
+      FROM feedback;
+    `;
+  
+    db.query(query, (err, results) => {
+      if (err) {
+        res.status(500).json({ error: 'Error fetching feedback data' });
+        return;
+      }
+      res.json(results[0]);
+    });
+  });
+  
+  app.get('/feedback', (req, res) => {
+    const query = `
+      SELECT 
+        customer_name, feedback_text, rating, date_submitted
+      FROM feedback
+      ORDER BY date_submitted DESC;
+    `;
+  
+    db.query(query, (err, results) => {
+      if (err) {
+        res.status(500).json({ error: 'Error fetching feedback data' });
+        return;
+      }
+      res.json(results);
+    });
+  });
+  
+
+
 
 app.listen(port, () => {
     console.log("Server started on port" +  "${port}");

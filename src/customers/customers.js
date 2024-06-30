@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
           
           let td3 = document.createElement('td');
           let td4 = document.createElement('td');
+          let td5 = document.createElement('td');
           
           td1.innerHTML = data[i].Name;
           
@@ -45,6 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
           data[i].ContactNo;
           
           td4.innerHTML = "<button>Delete</button>";
+
+          td5.innerHTML = data[i].ID;
           
           
           tr.appendChild(td1);
@@ -55,9 +58,35 @@ document.addEventListener('DOMContentLoaded', () => {
           
           tr.appendChild(td4);
         
-          tr.addEventListener(
+          td4.addEventListener(
             'click' , ()=>{
               console.log(td1.innerHTML);
+              confirm(
+                "Are you sure you want to delete this customer?"
+              )
+              
+             if(confirm){
+              fetch(
+                `http://localhost:8000/customers/${td5.innerHTML}`,
+                {
+                  method: 'DELETE',
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+                }
+              ).then(
+                response => response.json()
+                 .then(data => {
+                    alert("Customer deleted successfully with id " + data);
+                    
+                  })
+              ).catch(err => {
+              alert('Error:', err);
+              });
+             }
+
+
+
             }
           )
           

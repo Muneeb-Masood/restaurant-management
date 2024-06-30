@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="/src/styles.css">
   <!-- box icon -->
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="sidebar">
@@ -43,10 +44,11 @@
         </a>
       </li>
       <li>
-        <a href="#" id="chefAnchorTag">
+        <a href="#" id="feedbackAnchorTag">
           <i class='bx bx-dollar' ></i>
           <span class="links_name">
-Chefs          </span>
+            Feedback
+          </span>
         </a>
       </li>
       <li>
@@ -57,7 +59,6 @@ Chefs          </span>
           </span>
         </a>
       </li>
-    
       <li>
         <a href="#" id="orderAnchorTag">
           <i class='bx bx-heart'></i>
@@ -67,69 +68,62 @@ Chefs          </span>
         </a>
       </li>
       <li>
-        <a href="#" id="chefAnchorTag">
+        <a href="#" id="billAnchorTag">
           <i class='bx bx-cog'></i>
           <span class="links_name">
             Bills
           </span>
         </a>
       </li>
-  
     </ul>
   </div>
-  <!-- End Sideber -->
+  <!-- End Sidebar -->
   <section class="home_section">
     <div class="topbar">
       <div class="toggle">
         <i class='bx bx-menu' id="btn"></i>
       </div>
-      <div class="system-name" >
-           <h1>RESTAURANT MANAGEMENT SYSTEM</h1>
+      <div class="system-name">
+        <h1>RESTAURANT MANAGEMENT SYSTEM</h1>
       </div>
-      <!-- <div class="user_wrapper">
-        <img src="img/user.jpg" alt="">
-      </div> -->
     </div>
-    
     <!-- End Top Bar -->
-  
     <div class="details">
-        <div class="recent_project">
-          <div class="card_header">
-            <h2>Lastet Projects</h2>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <td>Chef Name</td>
-                <td>Specialist Of</td>
-                <td>Email</td>
-                <td></td>
-              </tr>
-            </thead>
-            <tbody>
-              
-            
-            </tbody>
-          </table>
+      <div class="recent_project">
+        <div class="card_header">
+          <h2>Last Projects</h2>
         </div>
-        <div id="customer-section">
-          <h2>Chefs</h2>
-          <form id="customer-form">
-              <input type="text" id="chef-name" placeholder="Name" required>
-              <input type="text" id="chef-role" placeholder="Role" required>
-              <input type="text" id="chef-email" placeholder="Email" required>
-              <button type="submit" id="addChef">Add Chef</button>
-          </form>
-          <ul id="chef-list"></ul>
+        <table>
+          <thead>
+            <tr>
+              <td>Project Name</td>
+              <td>Hours</td>
+              <td>Priority</td>
+              <td>Members</td>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
       </div>
+      <div id="customer-section">
+        <h2>Feedback</h2>
+        <div class="filters">
+          <input type="text" id="searchBar" placeholder="Search feedback...">
+          <select id="ratingFilter">
+            <option value="">All Ratings</option>
+            <option value="5">5 Stars</option>
+            <option value="4">4 Stars</option>
+            <option value="3">3 Stars</option>
+            <option value="2">2 Stars</option>
+            <option value="1">1 Star</option>
+          </select>
+        </div>
+        <canvas id="feedbackChart" width="400" height="400"></canvas>
+        <ul id="feedback-list"></ul>
       </div>
-   
+    </div>
   </section>
-
- 
+  <script src="/src/index.js"></script>
+  <script src="/src/feedbacks/feedbacks.js"></script>
 </body>
-
-<script src="/src/index.js"></script>
-<script src="/src/chefs/chefs.js"></script>
 </html>

@@ -1,0 +1,54 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f4f4f4;
+}
+
+.container {
+  text-align: center;
+}
+
+canvas {
+  margin-top: 20px;
+}
+
+#feedback-list {
+  margin-top: 20px;
+  max-height: 300px;
+  overflow-y: auto;
+  text-align: left;
+}
+
+.feedback-item {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.feedback-item:last-child {
+  border-bottom: none;
+}
+
+.feedback-item .rating {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+#searchBar {
+  padding: 10px;
+  width: 70%;
+}
+
+#ratingFilter {
+  padding: 10px;
+  width: 25%;
+}
