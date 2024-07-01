@@ -1,195 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Bill Management</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            padding: 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .bill-list {
-            margin-bottom: 20px;
-            border-collapse: collapse;
-            width: 100%;
-        }
-        .bill-list th, .bill-list td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-        .bill-list th {
-            background-color: #f2f2f2;
-        }
-        .bill-actions {
-            margin-top: 20px;
-        }
-        .btn {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-        }
-        .btn:hover {
-            background-color: #45a049;
-        }
-        .form-group {
-            margin-bottom: 10px;
-        }
-        .form-group label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Management System - Orders</title>
+  <link rel="stylesheet" href="/src/styles.css">
+  <!-- <link rel="stylesheet" href="/src/bills.css"> -->
+  <link rel="stylesheet" href="/src/orders/orders.css">
+  <link rel="stylesheet" href="/src/bills/bills.css">
+  <!-- box icon -->
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  <!-- Chart.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Admin Bill Management</h1>
-
-        <!-- Bill List -->
-        <table class="bill-list">
-            <thead>
-                <tr>
-                    <th>Bill ID</th>
-                    <th>Order ID</th>
-                    <th>Date</th>
-                    <th>Total Amount</th>
-                    <th>Payment Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="bill-table-body">
-                <!-- Bill rows will be dynamically added here -->
-            </tbody>
-        </table>
-
-        <!-- Bill Actions -->
-        <div class="bill-actions">
-            <button class="btn" onclick="showCreateForm()">Create New Bill</button>
-        </div>
-
-        <!-- Create Bill Form (hidden by default) -->
-        <div id="create-bill-form" style="display: none;">
-            <h2>Create New Bill</h2>
-            <form id="bill-form">
-                <div class="form-group">
-                    <label for="order-id">Order ID:</label>
-                    <input type="text" id="order-id" name="order_id" required>
-                </div>
-                <div class="form-group">
-                    <label for="total-amount">Total Amount:</label>
-                    <input type="number" id="total-amount" name="total_amount" step="0.01" required>
-                </div>
-                <div class="form-group">
-                    <label for="payment-status">Payment Status:</label>
-                    <input type="text" id="payment-status" name="payment_status" required>
-                </div>
-                <button type="submit" class="btn">Create Bill</button>
-                <button type="button" class="btn" onclick="hideCreateForm()">Cancel</button>
-            </form>
-        </div>
+  <div class="sidebar">
+    <div class="logo_details">
+      <i class='bx bx-code-alt'></i>
+      <div class="logo_name">
+        RMS
+      </div>
     </div>
+    <ul>
+      <li>
+        <a href="#" class="active">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">
+            Dashboard
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" id="userAnchorTag">
+          <i class='bx bx-user'></i>
+          <span class="customer-btn">
+            Customers
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" id="feedbackAnchorTag">
+          <i class='bx bxs-truck'></i>
+          <span class="links_name">
+            Feedbacks
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" id="waiterAnchorTag">
+          <i class='bx bx-dollar' ></i>
+          <span class="links_name">
+            Waiters
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" id="chefAnchorTag">
+          <i class='bx bxs-user-plus'></i>
+          <span class="links_name">
+            Chefs
+          </span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" id="orderAnchorTag">
+          <i class='bx bx-heart'></i>
+          <span class="links_name">
+            Orders
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" id="billAnchorTag">
+          <i class='bx bx-cog'></i>
+          <span class="links_name">
+            Bills
+          </span>
+        </a>
+      </li>
 
-    <script>
-        // Sample data for demonstration
-        const bills = [
-            { bill_id: 1, order_id: 101, date: '2024-06-30', total_amount: 50.25, payment_status: 'Paid' },
-            { bill_id: 2, order_id: 102, date: '2024-06-30', total_amount: 30.50, payment_status: 'Pending' },
-            { bill_id: 3, order_id: 103, date: '2024-06-29', total_amount: 45.75, payment_status: 'Paid' }
-        ];
+      <li>
+        <a href="#" id="menuAnchorTag">
+          <i class='bx bx-cog'></i>
+          <span class="links_name">
+            Menus
+          </span>
+        </a>
+      </li>
 
-        // Function to render bills in the table
-        function renderBills() {
-            const tableBody = document.getElementById('bill-table-body');
-            tableBody.innerHTML = '';
 
-            bills.forEach(bill => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${bill.bill_id}</td>
-                    <td>${bill.order_id}</td>
-                    <td>${bill.date}</td>
-                    <td>$${bill.total_amount.toFixed(2)}</td>
-                    <td>${bill.payment_status}</td>
-                    <td>
-                        <button class="btn" onclick="editBill(${bill.bill_id})">Edit</button>
-                        <button class="btn" onclick="deleteBill(${bill.bill_id})">Delete</button>
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
+      <li>
+        <a href="#" id="saleAnchorTag">
+          <i class='bx bx-cog'></i>
+          <span class="links_name">
+            Sales
+          </span>
+        </a>
+      </li>
+  
+    </ul>
+  </div>
+  <section class="home_section">
+    <div class="topbar">
+      <div class="toggle">
+        <i class='bx bx-menu' id="btn"></i>
+      </div>
+      <div class="system-name">
+        <h1>RESTAURANT MANAGEMENT SYSTEM</h1>
+      </div>
+    </div>
+    <div class="details">
+      <div class="orders-container">
+        <h1>Bills Overview</h1>
+        <div class="charts-container">
+          <div class="chart">
+            <h2>Bills Status</h2>
+            <!-- <canvas id="orderChart" width="400" height="300"></canvas>
+          </div> -->
+          <!-- <div class="chart">
+            <h2>Payment Status</h2> -->
+            <canvas id="paymentChart" width="400" height="300"></canvas>
+          </div>
+        </div>
+        <div id="statsContainer" class="stats-container">
+        </div>
+        <div class="order-list">
+          <h2>Bills</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Bill ID</th>
+                <th>Price</th>
+                <th>Bill Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
 
-        // Function to show the create bill form
-        function showCreateForm() {
-            document.getElementById('create-bill-form').style.display = 'block';
-        }
-
-        // Function to hide the create bill form
-        function hideCreateForm() {
-            document.getElementById('create-bill-form').style.display = 'none';
-        }
-
-        // Function to handle bill creation (dummy function for demonstration)
-        function createBill(event) {
-            event.preventDefault();
-            const form = document.getElementById('bill-form');
-            const formData = new FormData(form);
-            const newBill = {
-                bill_id: bills.length + 1,
-                order_id: formData.get('order_id'),
-                date: new Date().toISOString().split('T')[0],  // Today's date
-                total_amount: parseFloat(formData.get('total_amount')),
-                payment_status: formData.get('payment_status')
-            };
-            bills.push(newBill);
-            renderBills();
-            form.reset();
-            hideCreateForm();
-        }
-
-        // Dummy functions for edit and delete actions (for demonstration)
-        function editBill(billId) {
-            alert(`Edit bill with ID ${billId}`);
-        }
-
-        function deleteBill(billId) {
-            if (confirm(`Are you sure you want to delete bill with ID ${billId}?`)) {
-                bills = bills.filter(bill => bill.bill_id !== billId);
-                renderBills();
-            }
-        }
-
-        // Initial rendering of bills
-        renderBills();
-    </script>
+      <div id="customer-section">
+        <h2>Bills</h2>
+        <form id="customer-form">
+            <input type="text" id="bill-price" placeholder="Price" required>
+            <input type="text" id="bill-status" placeholder="Status" required>
+           
+            <button type="submit" id="addBill">Add Bill</button>
+        </form>
+        <ul id="customer-list"></ul>
+    </div>
+    </div>
+  </section>
+<script src="/src/index.js"></script>
+  <script src="/src/bills/bills.js"></script>
 </body>
 </html>

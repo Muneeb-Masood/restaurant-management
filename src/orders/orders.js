@@ -1,5 +1,5 @@
 const locationCounts = {};
-const paymentCounts = {
+const orderCounts = {
   Paid: 0,
   Pending: 0,
 };
@@ -34,22 +34,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
       td1.innerHTML = data[i].OrderNo;
       td2.innerHTML = data[i].CustomerID;
-      td3.innerHTML = data[i].OrderStatus;
-      td4.innerHTML = data[i].PaymentStatus;
-      td5.innerHTML = data[i].OrderDate;
-      td6.innerHTML = data[i].Price;
-      td7.innerHTML = data[i].Location;
+      td3.innerHTML = data[i].BillID;
+      td4.innerHTML = data[i].WaiterID;
+      td5.innerHTML = data[i].FeedbackID;
+      td6.innerHTML = data[i].OrderStatus;
+      td7.innerHTML = data[i].OrderDate;
 
       // Counting orders by location for pie chart
-      if (locationCounts[data[i].Location]) {
-        locationCounts[data[i].Location]++;
-      } else {
-        locationCounts[data[i].Location] = 1;
-      }
+      // if (locationCounts[data[i].Location]) {
+      //   locationCounts[data[i].Location]++;
+      // } else {
+      //   locationCounts[data[i].Location] = 1;
+      // }
 
       // Counting payment statuses for pie chart
-      if (data[i].PaymentStatus in paymentCounts) {
-        paymentCounts[data[i].PaymentStatus]++;
+      if (data[i].OrderStatus in orderCounts) {
+        orderCounts[data[i].OrderStatus]++;
       }
 
       tr.appendChild(td1);
@@ -63,8 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
       tbody.appendChild(tr);
     }
 
-    createPieChart(locationCounts, 'orderChart');
-    createPieChart(paymentCounts, 'paymentChart');
+    // createPieChart(locationCounts, 'orderChart');
+    createPieChart(orderCounts, 'paymentChart');
   }
 
   // Function to calculate overall stats
@@ -72,25 +72,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let totalOrders = data.length;
     let deliveredOrders = data.filter(order => order.OrderStatus === 'Delivered').length;
     let pendingOrders = totalOrders - deliveredOrders;
-    let totalPayments = data.reduce((total, order) => total + parseFloat(order.Price), 0);
-    let receivedPayments = data.filter(order => order.PaymentStatus === 'Paid')
-                                .reduce((total, order) => total + parseFloat(order.Price), 0);
-    let pendingPayments = totalPayments - receivedPayments;
-
-    displayStats(totalOrders, deliveredOrders, pendingOrders, totalPayments, receivedPayments, pendingPayments);
+   
+    displayStats(totalOrders, deliveredOrders, pendingOrders);
   }
 
   // Function to display overall stats
-  function displayStats(totalOrders, deliveredOrders, pendingOrders, totalPayments, receivedPayments, pendingPayments) {
+  function displayStats(totalOrders, deliveredOrders, pendingOrders) {
     const statsContainer = document.getElementById('statsContainer');
     statsContainer.innerHTML = `
       <h2>Overall Stats</h2>
       <p>Total Orders: ${totalOrders}</p>
       <p>Delivered Orders: ${deliveredOrders}</p>
       <p>Pending Orders: ${pendingOrders}</p>
-      <p>Total Payments: $${totalPayments.toFixed(2)}</p>
-      <p>Received Payments: $${receivedPayments.toFixed(2)}</p>
-      <p>Pending Payments: $${pendingPayments.toFixed(2)}</p>
+     
     `;
   }
 

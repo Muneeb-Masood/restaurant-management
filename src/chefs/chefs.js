@@ -22,25 +22,32 @@ document.addEventListener('DOMContentLoaded', () => {
       tbody.innerHTML = ''; // Clear previous rows
       chefs.forEach(chef => {
           const tr = document.createElement('tr');
-        let td1 = document.createElement('td');
+          let td1 = document.createElement('td');
           let td2 = document.createElement('td');
           let td3 = document.createElement('td');
           let td4 = document.createElement('td');
           let td5 = document.createElement('td');
           let td6 = document.createElement('td');
+          let td7 = document.createElement('td');
+          let td8 = document.createElement('td');
 
        
 
           td1.innerHTML = chef.Name;
-          td2.innerHTML = chef.Role;
+          td2.innerHTML = chef.Address;
           td3.innerHTML = chef.Email;
           td4.innerHTML = "<button>Delete</button>";
           td5.innerHTML = "<button>Update</button>";
           td6.innerHTML = chef.ID;
+          td7.innerHTML = chef.Experience;
+          td8.innerHTML = chef.Speciality;
 
+          tr.appendChild(td6);
           tr.appendChild(td1);
-          tr.appendChild(td2);
           tr.appendChild(td3);
+          tr.appendChild(td2);
+          tr.appendChild(td8);
+          tr.appendChild(td7);
           tr.appendChild(td4);
           tr.appendChild(td5);
           tbody.appendChild(tr);
@@ -84,14 +91,19 @@ document.addEventListener('DOMContentLoaded', () => {
   // Function to handle update chef
   function updateChef(chef) {
       const newName = prompt("Enter new name:", chef.Name);
-      const newRole = prompt("Enter new role:", chef.Role);
+      const newAddress = prompt("Enter new address:", chef.Address);
       const newEmail = prompt("Enter new email:", chef.Email);
+      const newSpeciality = prompt("Enter new speciality:", chef.Speciality);
+      const newExperience = prompt("Enter new experience:", chef.Experience);
 
-      if (newName !== null && newRole !== null && newEmail !== null) {
+      if (newName !== null && newAddress !== null && newEmail !== null  && newSpeciality !== null  && newExperience !== null ) {
           const updatedChef = {
               Name: newName,
-              Role: newRole,
-              Email: newEmail
+              Address: newAddress,
+              Email: newEmail,
+              Speciality: newSpeciality,
+              Experience: newExperience,
+              ID: chef.ID, // Keep ID unchanged to update existing record
           };
 
           fetch(`http://localhost:8000/chefs/${chef.ID}`, {
@@ -123,11 +135,11 @@ let addChef = document.getElementById("addChef");
 addChef.addEventListener('click', function(){
   console.log("Button press hoa ha add Chef ka");
   let name = document.getElementById('chef-name').value;
-  let role = document.getElementById('chef-role').value;
+  let address = document.getElementById('chef-address').value;
   let email = document.getElementById('chef-email').value;
-  console.log(name);
-  console.log(role);
-  console.log(email);
+  let experience = document.getElementById('chef-experience').value;
+  let speciality = document.getElementById('chef-speciality').value;
+  
 
 
   fetch('http://localhost:8000/chefs', {
@@ -135,7 +147,7 @@ addChef.addEventListener('click', function(){
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ name, role, email })
+    body: JSON.stringify({ name, address, email , experience , speciality })
   })
   .then(response => response.json())
   .then(data => {

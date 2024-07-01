@@ -131,7 +131,7 @@ app.get('/order', (req, res) => {
 
 app.post('/order', (req, res) => {
     const {customerID , billID , waiterID , feedbackID, orderStatus } = req.body;
-    const sql = 'INSERT INTO Orders (CustomerID, PaymentStatus, Price , location) VALUES (?, ?, ?, ?)';
+    const sql = 'INSERT INTO Orders (CustomerID, BillID, WaiterID , FeedbackID , OrderStatus) VALUES (?, ?, ?, ? , ?)';
    try{
     db.query(sql, [customerID, billID, waiterID , feedbackID, orderStatus ], (err, result) => {
         if (err) {
@@ -176,18 +176,18 @@ app.get('/bills', (req, res) => {
 });
 
 app.post('/bills', (req, res) => {
-    const { price, orderID, customerID } = req.body;
-    const sql = 'INSERT INTO Bill (Price, OrderID, CustomerID) VALUES (?, ?, ?)';
-    db.query(sql, [price, orderID, customerID], (err, result) => {
+    const { billPrice, billStatus  } = req.body;
+    const sql = 'INSERT INTO Bill (Price, Status) VALUES (?, ?)';
+    db.query(sql, [billPrice , billStatus], (err, result) => {
         if (err) throw err;
         res.send(result);
     });
 });
 
 app.put('/bills/:id', (req, res) => {
-    const { price, orderID, customerID } = req.body;
-    const sql = 'UPDATE Bill SET Price = ?, OrderID = ?, CustomerID = ? WHERE BillNo = ?';
-    db.query(sql, [price, orderID, customerID, req.params.id], (err, result) => {
+    const { billPrice, billStatus  } = req.body;
+    const sql = 'UPDATE Bill SET Price = ?, Status = ?  WHERE BillNo = ?';
+    db.query(sql, [billPrice, billStatus, req.params.id], (err, result) => {
         if (err) throw err;
         res.send(result);
     });
@@ -290,9 +290,9 @@ app.get('/chefs', (req, res) => {
 });
 
 app.post('/chefs', (req, res) => {
-    const { name  , role , email} = req.body;
-    const sql = 'INSERT INTO Chef (Name , Role , Email) VALUES (? , ? , ?)';
-    db.query(sql, [name , role , email], (err, result) => {
+    const { name  , email , address , experience , speciality} = req.body;
+    const sql = 'INSERT INTO Chef (Name ,  Email , Address , Speciality , Experience) VALUES (? , ? , ? , ? , ?)';
+    db.query(sql, [name , email , address,  experience , speciality], (err, result) => {
         if (err) throw err;
         res.send(result);
     });

@@ -1,0 +1,70 @@
+/* Basic styling for the orders section */
+.orders-container {
+    max-width: 2000px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.orders-container h1 {
+    text-align: center;
+    color: #333;
+}
+
+.charts-container {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.chart {
+    width: 44%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.chart h2 {
+    text-align: center;
+    color: #333;
+}
+
+.stats-container {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.order-list {
+    margin-top: 20px;
+}
+
+.order-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-list th, .order-list td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.order-list th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.order-list td {
+    background-color: #fff;
+}
+
+.order-list tbody tr:hover {
+    background-color: #f2f2f2;
+}
+

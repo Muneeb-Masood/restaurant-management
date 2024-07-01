@@ -121,10 +121,12 @@
           <table>
             <thead>
               <tr>
-                <td>Chef Name</td>
-                <td>Specialist Of</td>
+                <td>Chef ID</td>
+                <td>Name</td>
                 <td>Email</td>
-                <td></td>
+                <td>Address</td>
+                <td>Specialist Of</td>
+                <td>Experience</td>
               </tr>
             </thead>
             <tbody>
@@ -137,8 +139,10 @@
           <h2>Chefs</h2>
           <form id="customer-form">
               <input type="text" id="chef-name" placeholder="Name" required>
-              <input type="text" id="chef-role" placeholder="Role" required>
               <input type="text" id="chef-email" placeholder="Email" required>
+              <input type="text" id="chef-address" placeholder="Address" required>
+              <input type="text" id="chef-experience" placeholder="Experience" required>
+              <input type="text" id="chef-speciality" placeholder="Speciality" required>
               <button type="submit" id="addChef">Add Chef</button>
           </form>
           <ul id="chef-list"></ul>
