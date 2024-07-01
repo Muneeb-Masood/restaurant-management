@@ -59,9 +59,9 @@ app.post('/customers', (req, res) => {
 });
 
 app.post('/waiters', (req, res) => {
-    const { name , role ,email } = req.body;
-    const sql = 'INSERT INTO Waiter (Name , Role , Email) VALUES (? , ? , ?)';
-    db.query(sql, [name , role , email], (err, result) => {
+    const { name , role ,email , address , shift } = req.body;
+    const sql = 'INSERT INTO Waiter (Name , Role , Email , Address , Shift) VALUES (? , ? , ? , ? , ?)';
+    db.query(sql, [name , role , email , address , shift], (err, result) => {
         if (err) throw err;
         res.send(result);
     });
@@ -130,10 +130,10 @@ app.get('/order', (req, res) => {
 });
 
 app.post('/order', (req, res) => {
-    const { customerID,  paymentStatus, price , location } = req.body;
+    const {customerID , billID , waiterID , feedbackID, orderStatus } = req.body;
     const sql = 'INSERT INTO Orders (CustomerID, PaymentStatus, Price , location) VALUES (?, ?, ?, ?)';
    try{
-    db.query(sql, [customerID, paymentStatus, price , location], (err, result) => {
+    db.query(sql, [customerID, billID, waiterID , feedbackID, orderStatus ], (err, result) => {
         if (err) {
             console.error('Error inserting order:', err);
             res.status(500).send(false);
@@ -246,13 +246,28 @@ app.get('/waiters', (req, res) => {
 });
 
 
-
 app.put('/waiters/:id', (req, res) => {
-    const { name } = req.body;
-    const sql = 'UPDATE Waiter SET Name = ? WHERE ID = ?';
-    db.query(sql, [name, req.params.id], (err, result) => {
-        if (err) throw err;
-        res.send(result);
+    console.log("Update ki req aie ha on waiters");
+    const { name, role, email, address, shift } = req.body;
+    const sql = 'UPDATE Waiter SET Name = ?, Role = ?, Email = ?, Address = ?, Shift = ? WHERE ID = ?';
+    db.query(sql, [name, role, email, address, shift, req.params.id], (err, result) => {
+        try{
+            if(err){
+                throw err;
+            }
+            console.log(result);
+            res.send({
+                "name" : name,
+                "role" : role,
+                "email" : email,
+                "address" : address,
+                "shift" : shift
+            });
+        }
+        catch(e){
+            console.log("Error ha connection mai");
+            console.log(e);
+        }
     });
 });
 
@@ -263,6 +278,7 @@ app.delete('/waiters/:id', (req, res) => {
         res.send(result);
     });
 });
+
 
 // CRUD operations for Chef
 app.get('/chefs', (req, res) => {
@@ -288,7 +304,7 @@ app.put('/chefs/:id', (req, res) => {
     console.log("Name: " + Name);
     console.log("Role: " + Role);
     console.log("Email: " + Email);
-    const sql = 'UPDATE Chef SET Name = ? , Role = ? , Email = ? ,  WHERE ID = ?';
+    const sql = 'UPDATE Chef SET Name = ? , Role = ? , Email = ?   WHERE ID = ?';
     db.query(sql, [Name, Role , Email, req.params.id], (err, result) => {
         try{
             if(err){
@@ -298,6 +314,7 @@ app.put('/chefs/:id', (req, res) => {
         }
 
         catch(err){
+            console.log(err);
             res.send(false);
         }
     });
@@ -328,7 +345,7 @@ app.post('/login', (req, res) => {
     });
 });
 
-app.get('/api/sales', (req, res) => {
+app.get('/sales', (req, res) => {
     const sql = 'SELECT transaction_date, total_amount, transaction_count, avg_transaction_value, food_sales, beverage_sales FROM sales';
     db.query(sql, (err, result) => {
         if (err) {
@@ -369,15 +386,23 @@ app.get('/feedback-stats', (req, res) => {
         res.status(500).json({ error: 'Error fetching feedback data' });
         return;
       }
-      res.json(results);
+      res.send(results);
     });
   });
   
 
   app.post('/menus', (req, res) => {
-    const { name, description, price, category } = req.body;
-    const sql = 'INSERT INTO Menu (Name, Description, Price, Category) VALUES (?, ?, ?, ?)';
-    db.query(sql, [name, description, price, category], (err, result) => {
+    let sql = "";
+    const { name, description, price, category , chefId } = req.body;
+    if(chefId =="NULL"){
+
+         sql = 'INSERT INTO Menu (Name, Description, Price, Category , ChefID) VALUES (?, ?, ?, ? , NULL)';
+    }
+    else{
+
+         sql = 'INSERT INTO Menu (Name, Description, Price, Category , ChefID) VALUES (?, ?, ?, ? , ?)';
+    }
+    db.query(sql, [name, description, price, category, chefId], (err, result) => {
         if (err) {
             console.error('Error adding menu item:', err);
             res.status(500).send('Error adding menu item');

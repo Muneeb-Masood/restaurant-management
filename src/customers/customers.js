@@ -25,12 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
           td5.innerHTML = "<button>Update</button>";
           td6.innerHTML = data[i].ID;
           
+          tr.appendChild(td6);
           tr.appendChild(td1);
           tr.appendChild(td2);
           tr.appendChild(td3);
           tr.appendChild(td4);
           tr.appendChild(td5);
-          tr.appendChild(td6);
 
           td4.querySelector('button').addEventListener('click', () => {
               if (confirm("Are you sure you want to delete this customer?")) {

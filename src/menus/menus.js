@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
           let td5 = document.createElement('td');
           let td6 = document.createElement('td');
           let td7 = document.createElement('td');
+          let td8 = document.createElement('td');
 
           td1.innerHTML = data[i].Name;
           td2.innerHTML = data[i].Description;
@@ -23,7 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
           td5.innerHTML = "<button>Update</button>";
           td6.innerHTML = data[i].ItemID;
           td7.innerHTML = data[i].Category;
+          td8.innerHTML = data[i].ChefID;
 
+          tr.appendChild(td6);
+          tr.appendChild(td8);
           tr.appendChild(td1);
           tr.appendChild(td2);
           tr.appendChild(td3);
@@ -118,6 +122,7 @@ let addMenu = document.getElementById("addMenu");
 // console.log(responseData.length + " customers");
 addMenu.addEventListener('click', function(){
   console.log("Button press hoa ha add menu ka");
+  let chefId = document.getElementById('chefId').value;
   let name = document.getElementById('name').value;
   let description = document.getElementById('description').value;
   let price = document.getElementById('price').value;
@@ -128,7 +133,7 @@ addMenu.addEventListener('click', function(){
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ name, description, price , category })
+    body: JSON.stringify({ chefId, name, description, price , category })
   })
   .then(response =>  alert("Menu added successfully"))
  
@@ -138,12 +143,12 @@ addMenu.addEventListener('click', function(){
 
 
 
-let btn = document.getElementById("userAnchorTag");
-console.log(btn);
-console.log("Muneeb Bhaia");
-btn.addEventListener(
-  "click",
-()=>{
-  window.location.href = "http://localhost:5500/src/customers/customers.html"
-}
-)
+// let btn = document.getElementById("userAnchorTag");
+// console.log(btn);
+// console.log("Muneeb Bhaia");
+// btn.addEventListener(
+//   "click",
+// ()=>{
+//   window.location.href = "http://localhost:5500/src/customers/customers.html"
+// }
+// )

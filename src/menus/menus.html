@@ -30,16 +30,16 @@
       <li>
         <a href="#" id="userAnchorTag">
           <i class='bx bx-user'></i>
-          <span class="links_name">
+          <span class="customer-btn">
             Customers
           </span>
         </a>
       </li>
       <li>
-        <a href="#" id="managerAnchorTag">
+        <a href="#" id="feedbackAnchorTag">
           <i class='bx bxs-truck'></i>
           <span class="links_name">
-            Managers
+            Feedbacks
           </span>
         </a>
       </li>
@@ -76,6 +76,25 @@
           </span>
         </a>
       </li>
+
+      <li>
+        <a href="#" id="menuAnchorTag">
+          <i class='bx bx-cog'></i>
+          <span class="links_name">
+            Menus
+          </span>
+        </a>
+      </li>
+
+
+      <li>
+        <a href="#" id="saleAnchorTag">
+          <i class='bx bx-cog'></i>
+          <span class="links_name">
+            Sales
+          </span>
+        </a>
+      </li>
   
     </ul>
   </div>
@@ -98,15 +117,17 @@
     <div class="details">
         <div class="recent_project">
           <div class="card_header">
-            <h2>Lastet Projects</h2>
+            <h2>Menus</h2>
           </div>
           <table>
             <thead>
               <tr>
-                <td>Project Name</td>
-                <td>Hours</td>
-                <td>Priority</td>
-                <td>Members</td>
+                <td>Menu ID</td>
+                <td>Chef Id</td>
+                <td>Name</td>
+                <td>Description</td>
+                <td>Price</td>
+                <td>Category</td>
               </tr>
             </thead>
             <tbody>
@@ -122,6 +143,7 @@
             <textarea id="description" placeholder="Description"></textarea>
             <input type="number" id="price" placeholder="Price" step="10" required>
             <input type="text" id="category" placeholder="Category">
+            <input type="text" id="chefId" placeholder="Chef ID">
               <button type="submit" id="addMenu">Add Menu</button>
           </form>
           <ul id="menu-list"></ul>
@@ -132,7 +154,7 @@
 
  
 </body>
-
+<script src="/src/index.js"></script>
 <script src="/src/menus/menus.js"></script>
 </html>
 

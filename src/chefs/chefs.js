@@ -22,22 +22,36 @@ document.addEventListener('DOMContentLoaded', () => {
       tbody.innerHTML = ''; // Clear previous rows
       chefs.forEach(chef => {
           const tr = document.createElement('tr');
-          tr.innerHTML = `
-              <td>${chef.Name}</td>
-              <td>${chef.Role}</td>
-              <td>${chef.Email}</td>
-              <td><button class="delete-button" data-id="${chef.ID}">Delete</button></td>
-              <td><button class="update-button" data-id="${chef.ID}">Update</button></td>
-          `;
+        let td1 = document.createElement('td');
+          let td2 = document.createElement('td');
+          let td3 = document.createElement('td');
+          let td4 = document.createElement('td');
+          let td5 = document.createElement('td');
+          let td6 = document.createElement('td');
+
+       
+
+          td1.innerHTML = chef.Name;
+          td2.innerHTML = chef.Role;
+          td3.innerHTML = chef.Email;
+          td4.innerHTML = "<button>Delete</button>";
+          td5.innerHTML = "<button>Update</button>";
+          td6.innerHTML = chef.ID;
+
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          tr.appendChild(td3);
+          tr.appendChild(td4);
+          tr.appendChild(td5);
           tbody.appendChild(tr);
 
           // Attach event listener for delete button
-          tr.querySelector('.delete-button').addEventListener('click', () => {
+          td4.addEventListener('click', () => {
               deleteChef(chef.ID);
           });
 
           // Attach event listener for update button
-          tr.querySelector('.update-button').addEventListener('click', () => {
+          td5.addEventListener('click', () => {
               updateChef(chef);
           });
       });
@@ -87,21 +101,16 @@ document.addEventListener('DOMContentLoaded', () => {
               },
               body: JSON.stringify(updatedChef)
           })
-          .then(response => {
-              if (response == true) {
-                alert('Chef updated successfully');
-                fetchAndRenderChefs(); 
-              }
-
-              else{
-                alert('Error in updating chef');
-              }
-          })
+          .then(response => response.json() )
+          .then(data => {
+            alert("Chef updated successfully");
+            td1.innerHTML = newName;
+            td2.innerHTML = newRole;
+            td3.innerHTML = newEmail;
+            fetchAndRenderChefs();
+        })
          
-          .catch(error => {
-              console.error('Error updating chef:', error);
-              alert('Error updating chef');
-          });
+          
       }
   }
 
@@ -139,12 +148,12 @@ addChef.addEventListener('click', function(){
 
 
 
-let btn = document.getElementById("userAnchorTag");
-console.log(btn);
-console.log("Muneeb Bhaia");
-btn.addEventListener(
-  "click",
-()=>{
-  window.location.href = "http://localhost:5500/src/chefs/chefs.html"
-}
-)
+// let btn = document.getElementById("userAnchorTag");
+// console.log(btn);
+// console.log("Muneeb Bhaia");
+// btn.addEventListener(
+//   "click",
+// ()=>{
+//   window.location.href = "http://localhost:5500/src/chefs/chefs.html"
+// }
+// )

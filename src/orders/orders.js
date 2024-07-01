@@ -123,16 +123,16 @@ let addOrder = document.getElementById("addOrder");
 addOrder.addEventListener('click', function(){
   console.log("Button press hoa ha  addOrder ka");
   let customerID = document.getElementById('customer-id').value;
-  // let orderStatus = document.getElementById('order-status').value;
-  let paymentStatus = document.getElementById('payment-status').value;
-  let price = document.getElementById('price').value;
-  let location = document.getElementById('location').value;
+  let billID = document.getElementById('bill-id').value;
+  let waiterID = document.getElementById('waiter-id').value;
+  let feedbackID = document.getElementById('feedback-id').value;
+  let orderStatus = document.getElementById('order-status').value;
   fetch('http://localhost:8000/order', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({customerID , paymentStatus , price , location })
+    body: JSON.stringify({customerID , billID , waiterID , feedbackID, orderStatus})
   })
   .then(response =>     {
     console.log(response);

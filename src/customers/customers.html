@@ -29,16 +29,16 @@
       <li>
         <a href="#" id="userAnchorTag">
           <i class='bx bx-user'></i>
-          <span class="links_name">
+          <span class="customer-btn">
             Customers
           </span>
         </a>
       </li>
       <li>
-        <a href="#" id="managerAnchorTag">
+        <a href="#" id="feedbackAnchorTag">
           <i class='bx bxs-truck'></i>
           <span class="links_name">
-            Managers
+            Feedbacks
           </span>
         </a>
       </li>
@@ -75,6 +75,25 @@
           </span>
         </a>
       </li>
+
+      <li>
+        <a href="#" id="menuAnchorTag">
+          <i class='bx bx-cog'></i>
+          <span class="links_name">
+            Menus
+          </span>
+        </a>
+      </li>
+
+
+      <li>
+        <a href="#" id="saleAnchorTag">
+          <i class='bx bx-cog'></i>
+          <span class="links_name">
+            Sales
+          </span>
+        </a>
+      </li>
   
     </ul>
   </div>
@@ -97,15 +116,15 @@
     <div class="details">
         <div class="recent_project">
           <div class="card_header">
-            <h2>Lastet Projects</h2>
+            <h2>Customers</h2>
           </div>
           <table>
             <thead>
               <tr>
-                <td>Project Name</td>
-                <td>Hours</td>
-                <td>Priority</td>
-                <td>Members</td>
+                <td>Customer ID</td>
+                <td>Name</td>
+                <td>Address</td>
+                <td>Contact Number</td>
               </tr>
             </thead>
             <tbody>
@@ -120,6 +139,7 @@
               <input type="text" id="customer-name" placeholder="Name" required>
               <input type="text" id="customer-address" placeholder="Address" required>
               <input type="text" id="customer-contact" placeholder="Contact No" required>
+          
               <button type="submit" id="addCustomer">Add Customer</button>
           </form>
           <ul id="customer-list"></ul>
@@ -131,6 +151,6 @@
  
 </body>
 
-<!-- <script src="/src/index.js"></script> -->
+<script src="/src/index.js"></script>
 <script src="/src/customers/customers.js"></script>
 </html>
