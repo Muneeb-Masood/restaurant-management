@@ -2,102 +2,179 @@
 document.addEventListener(
   'DOMContentLoaded',
   () => {
+    let dashboard = document.getElementById("Dashboard");
     let btn = document.getElementById("userAnchorTag");
-    console.log(btn);
-    console.log("Muneeb Bhaia");
+    let btn1 = document.getElementById("chefAnchorTag");
+    let btn2 = document.getElementById("waiterAnchorTag");
+    let btn3 = document.getElementById("feedbackAnchorTag");
+    let btn4 = document.getElementById("managerAnchorTag");
+    let btn5 = document.getElementById("orderAnchorTag");
+    let btn6 = document.getElementById("saleAnchorTag");
+    let btn7 = document.getElementById("billAnchorTag");
+    let btn8 = document.getElementById("menuAnchorTag");
+    
+    
+
     btn.addEventListener(
       "click",
-    ()=>{
+      ()=>{
       window.location.href = "http://localhost:5501/src/customers/customers.html"
+      btn.classList.add("active");
+      btn1.classList.remove("active");
+      btn2.classList.remove("active");
+      btn3.classList.remove("active");
+      btn4.classList.remove("active");
+      btn5.classList.remove("active");
+      btn6.classList.remove("active");
+      btn7.classList.remove("active");
+      btn8.classList.remove("active");
+      dashboard.classList.remove("active");
+
     }
     )
     
     
-    let btn1 = document.getElementById("chefAnchorTag");
-    console.log(btn1);
-    console.log("Muneeb Bhaia");
     btn1.addEventListener(
       "click",
     ()=>{
+      btn.classList.remove("active");
+      btn1.classList.add("active");
+      btn2.classList.remove("active");
+      btn3.classList.remove("active");
+      btn4.classList.remove("active");
+      btn5.classList.remove("active");
+      btn6.classList.remove("active");
+      btn7.classList.remove("active");
+      btn8.classList.remove("active");
+
       window.location.href = "http://localhost:5501/src/chefs/chefs.html"
     }
     )
     
     
-    let btn2 = document.getElementById("waiterAnchorTag");
-    console.log(btn);
-    console.log("Muneeb Bhaia");
+    
     btn2.addEventListener(
       "click",
     ()=>{
+      btn.classList.remove("active");
+      btn1.classList.remove("active");
+      btn2.classList.add("active");
+      btn3.classList.remove("active");
+      btn4.classList.remove("active");
+      btn5.classList.remove("active");
+      btn6.classList.remove("active");
+      btn7.classList.remove("active");
+      btn8.classList.remove("active");
       window.location.href = "http://localhost:5501/src/waiters/waiters.html"
     }
     )
     
     
-    let btn3 = document.getElementById("feedbackAnchorTag");
-    console.log(btn);
-    console.log("Muneeb Bhaia");
+  
     btn3.addEventListener(
       "click",
     ()=>{
+      btn.classList.remove("active");
+      btn1.classList.remove("active");
+      btn2.classList.remove("active");
+      btn3.classList.add("active");
+      btn4.classList.remove("active");
+      btn5.classList.remove("active");
+      btn6.classList.remove("active");
+      btn7.classList.remove("active");
+      btn8.classList.remove("active");
       window.location.href = "http://localhost:5501/src/feedbacks/feedbacks.html"
     }
     )
     
     
-    // let btn4 = document.getElementById("managerAnchorTag");
-    // console.log(btn);
-    // console.log("Muneeb Bhaia");
-    // btn4.addEventListener(
-    //   "click",
-    // ()=>{
-    //   window.location.href = "http://localhost:5501/src/managers/managers.html"
-    // }
-    // )
+    
+    btn4.addEventListener(
+      "click",
+    ()=>{
+      btn.classList.remove("active");
+      btn1.classList.remove("active");
+      btn2.classList.remove("active");
+      btn3.classList.remove("active");
+      btn4.classList.add("active");
+      btn5.classList.remove("active");
+      btn6.classList.remove("active");
+      btn7.classList.remove("active");
+      btn8.classList.remove("active");
+      window.location.href = "http://localhost:5501/src/managers/managers.html"
+    }
+    )
     
     
-    let btn5 = document.getElementById("orderAnchorTag");
-    console.log(btn);
-    console.log("Muneeb Bhaia");
+
     btn5.addEventListener(
       "click",
     ()=>{
+      btn.classList.remove("active");
+      btn1.classList.remove("active");
+      btn2.classList.remove("active");
+      btn3.classList.remove("active");
+      btn4.classList.remove("active");
+      btn5.classList.add("active");
+      btn6.classList.remove("active");
+      btn7.classList.remove("active");
+      btn8.classList.remove("active");
       window.location.href = "http://localhost:5501/src/orders/orders.html"
     }
     )
     
     
-    let btn6 = document.getElementById("saleAnchorTag");
-    console.log(btn);
-    console.log("Muneeb Bhaia");
+  
     btn6.addEventListener(
       "click",
     ()=>{
+      btn.classList.remove("active");
+      btn1.classList.remove("active");
+      btn2.classList.remove("active");
+      btn3.classList.remove("active");
+      btn4.classList.remove("active");
+      btn5.classList.remove("active");
+      btn6.classList.add("active");
+      btn7.classList.remove("active");
+      btn8.classList.remove("active");
       window.location.href = "http://localhost:5501/src/sales/sales.html"
     }
     )
     
     
     
-    let btn7 = document.getElementById("billAnchorTag");
-    console.log(btn);
-    console.log("Muneeb Bhaia");
+
     btn7.addEventListener(
       "click",
     ()=>{
+      btn.classList.remove("active");
+      btn1.classList.remove("active");
+      btn2.classList.remove("active");
+      btn3.classList.remove("active");
+      btn4.classList.remove("active");
+      btn5.classList.remove("active");
+      btn6.classList.remove("active");
+      btn7.classList.add("active");
+      btn8.classList.remove("active");
       window.location.href = "http://localhost:5501/src/bills/bills.html"
     }
     )
     
     
     
-    let btn8 = document.getElementById("menuAnchorTag");
-    console.log(btn);
-    console.log("Muneeb Bhaia");
+
     btn8.addEventListener(
       "click",
     ()=>{
+      btn.classList.remove("active");
+      btn1.classList.remove("active");
+      btn2.classList.remove("active");
+      btn3.classList.remove("active");
+      btn4.classList.remove("active");
+      btn5.classList.remove("active");
+      btn6.classList.remove("active");
+      btn7.classList.remove("active");
+      btn8.classList.add("active");
       window.location.href = "http://localhost:5501/src/menus/menus.html"
     }
     )
