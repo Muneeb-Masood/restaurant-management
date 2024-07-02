@@ -1,10 +1,33 @@
-const locationCounts = {};
+// const billCounts = {};
 const billCounts = {
   Paid: 0,
-  Pending: 0,
+  Unpaid: 0,
 };
 
 document.addEventListener('DOMContentLoaded', () => {
+  let dashboard = document.getElementById("Dashboard");
+    let btn = document.getElementById("userAnchorTag");
+    let btn1 = document.getElementById("chefAnchorTag");
+    let btn2 = document.getElementById("waiterAnchorTag");
+    let btn3 = document.getElementById("feedbackAnchorTag");
+    let btn4 = document.getElementById("managerAnchorTag");
+    let btn5 = document.getElementById("orderAnchorTag");
+    let btn6 = document.getElementById("saleAnchorTag");
+    let btn7 = document.getElementById("billAnchorTag");
+    let btn8 = document.getElementById("menuAnchorTag");
+
+    btn.classList.remove("active");
+    btn1.classList.remove("active");
+    btn2.classList.remove("active");
+    btn3.classList.remove("active");
+    btn4.classList.remove("active");
+    btn5.classList.remove("active");
+    btn6.classList.remove("active");
+    btn7.classList.add("active");
+    btn8.classList.remove("active");
+    dashboard.classList.remove("active");
+
+  
   let tbody = document.getElementsByTagName("tbody")[0];
 
   // Fetch order data and render it
@@ -40,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
       td6.innerHTML = "<button>Update</button>";
 
       td5.querySelector('button').addEventListener('click', () => {
-        if (confirm("Are you sure you want to delete this customer?")) {
+        if (confirm("Are you sure you want to delete this Bill?")) {
             fetch(`http://localhost:8000/bills/${td1.innerHTML}`, {
                 method: 'DELETE',
                 headers: {
@@ -80,8 +103,8 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 alert("Bill updated successfully");
            
-                td2.innerHTML = newPrice;
-                td3.innerHTML = newStatus;
+                td2.innerHTML = data.billPrice.value;;
+                td3.innerHTML = data.billStatus.value;
             })
             .catch(err => {
                 alert('Error in updating the Bills:', err);
@@ -101,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Counting payment statuses for pie chart
       if (data[i].Status in billCounts) {
-        billCounts[data[i].BillNo]++;
+        billCounts[data[i].Status]++;
       }
 
       tr.appendChild(td1);
@@ -122,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Function to calculate overall stats
   function calculateStats(data) {
     let totalBills = data.length;
-    let UnpaidBills = data.filter(bill => bill.BillStatus === 'Unpaid').length;
+    let UnpaidBills = data.filter(bill => bill.Status === 'Unpaid').length;
     // let pendingOrders = totalOrders - deliveredOrders;
    
     displayStats(totalBills, UnpaidBills);

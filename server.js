@@ -190,7 +190,7 @@ app.put('/bills/:id', (req, res) => {
     const sql = 'UPDATE Bill SET Price = ?, Status = ?  WHERE BillNo = ?';
     db.query(sql, [billPrice, billStatus, req.params.id], (err, result) => {
         if (err) throw err;
-        res.send(result);
+        res.send({billPrice: billPrice , billStatus: billStatus});
     });
 });
 
@@ -456,6 +456,35 @@ app.delete('/menus/:itemId', (req, res) => {
     });
 });
 
+
+
+app.get('/sales-data', async (req, res) => {
+    try {
+        const dailySalesQuery = `
+            SELECT DATE(BillDate) AS sale_date, SUM(Price) AS daily_sales
+            FROM Bill
+            GROUP BY DATE(BillDate)
+            ORDER BY sale_date;
+        `;
+        const dailySales = await queryDb(dailySalesQuery);
+
+        const monthlySalesQuery = `
+            SELECT strftime('%Y-%m', BillDate) AS sale_month, SUM(Price) AS monthly_sales
+            FROM Bill
+            GROUP BY strftime('%Y-%m', BillDate)
+            ORDER BY sale_month;
+        `;
+        const monthlySales = await queryDb(monthlySalesQuery);
+
+        res.json({
+            dailySales: dailySales.map(row => ({ sale_date: row.sale_date, daily_sales: row.daily_sales })),
+            monthlySales: monthlySales.map(row => ({ sale_month: row.sale_month, monthly_sales: row.monthly_sales }))
+        });
+    } catch (error) {
+        console.error('Error fetching sales data:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 
 
