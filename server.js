@@ -212,20 +212,23 @@ app.get('/managers', (req, res) => {
 });
 
 app.post('/managers', (req, res) => {
-    const {  name, address, contactNo , email , department  } = req.body;
-    const sql = 'INSERT INTO Manager (Name ,  Address , ContactNumber ,Email , Department) VALUES (? , ? , ? , ? , ? )';
-    db.query(sql, [ name, address, contactNo , email , department ], (err, result) => {
-        if (err) throw err;
-        res.send(result);
-    });
+    const {  name, address, contactNo , email , department , password } = req.body;
+    const sql = 'INSERT INTO Manager (Name ,  Address , ContactNumber ,Email , Department , Password) VALUES (? , ? , ? , ? , ? , ? )';
+    db.query(sql, [ name, address, contactNo , email , department  , password], (err, result) => {
+        if(err){
+            res.send({"success": false , "message": err.message})
+        }
+else{
+    res.send({"success": true , "message": "Manager added successfully"})
+}    });
 });
 
 app.put('/managers/:id', (req, res) => {
-    const { name, address, contactNo , email , department } = req.body;
-    const sql = 'UPDATE Manager SET Name = ? ,  Address = ? ,ContactNumber = ? , Email = ?   , Department = ? WHERE ManagerID = ?';
-    db.query(sql, [name, address, contactNo , email , department, req.params.id], (err, result) => {
+    const { name, address, contactNo , email , department   , password } = req.body;
+    const sql = 'UPDATE Manager SET Name = ? ,  Address = ? ,ContactNumber = ? , Email = ?   , Department = ? , Password = ? WHERE ManagerID = ?';
+    db.query(sql, [name, address, contactNo , email , department, password , req.params.id], (err, result) => {
         if (err) throw err;
-        res.send({name , address , contactNo , email , department});
+        res.send({name , address , contactNo , email , department , password});
     });
 });
 
@@ -333,12 +336,14 @@ app.delete('/chefs/:id', (req, res) => {
 
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
-    const sql = 'SELECT * FROM Manager WHERE email = ?';
+    const sql = 'SELECT * FROM Manager WHERE Email = ?';
     
     db.query(sql, [email], (err, results) => {
+        console.log(email);
+        console.log(password);
         if (err) throw err;
-        
-        if (results.length > 0 && results[0].password === password) {
+        console.log(results);
+        if (results.length > 0 && results[0].Password === password) {
             res.json({ success: true });
         } else {
             res.json({ success: false });
@@ -457,34 +462,37 @@ app.delete('/menus/:itemId', (req, res) => {
 });
 
 
-
-app.get('/sales-data', async (req, res) => {
-    try {
-        const dailySalesQuery = `
-            SELECT DATE(BillDate) AS sale_date, SUM(Price) AS daily_sales
-            FROM Bill
-            GROUP BY DATE(BillDate)
-            ORDER BY sale_date;
-        `;
-        const dailySales = await queryDb(dailySalesQuery);
-
-        const monthlySalesQuery = `
-            SELECT strftime('%Y-%m', BillDate) AS sale_month, SUM(Price) AS monthly_sales
-            FROM Bill
-            GROUP BY strftime('%Y-%m', BillDate)
-            ORDER BY sale_month;
-        `;
-        const monthlySales = await queryDb(monthlySalesQuery);
-
-        res.json({
-            dailySales: dailySales.map(row => ({ sale_date: row.sale_date, daily_sales: row.daily_sales })),
-            monthlySales: monthlySales.map(row => ({ sale_month: row.sale_month, monthly_sales: row.monthly_sales }))
-        });
-    } catch (error) {
-        console.error('Error fetching sales data:', error);
-        res.status(500).send('Internal Server Error');
-    }
+app.get('/daily-sales', (req, res) => {
+    console.log("Daily sales data request received");
+    const sql = `
+        SELECT DATE(BillDate) AS sale_date, SUM(Price) AS daily_sales
+        FROM Bill
+        GROUP BY DATE(BillDate)
+        ORDER BY sale_date;
+    `;
+    db.query(sql, (err, results) => {
+        if (err) throw err;
+        console.log("Daily sales results: ", results);
+        res.send(results);
+    });
 });
+
+// Endpoint to get monthly sales data
+app.get('/monthly-sales', (req, res) => {
+    console.log("Monthly sales data request received");
+    const sql = `
+        SELECT strftime('%Y-%m', BillDate) AS sale_month, SUM(Price) AS monthly_sales
+        FROM Bill
+        GROUP BY sale_month
+        ORDER BY sale_month;
+    `;
+    db.all(sql, (err, results) => {
+        if (err) throw err;
+        console.log("Monthly sales results: ", results);
+        res.send(results);
+    });
+});
+
 
 
 

@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert('Login successful');
+                window.location.href = 'http://localhost:5501/src/index.html';
             } else {
                 alert('Login failed');
             }

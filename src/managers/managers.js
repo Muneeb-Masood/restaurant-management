@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
           let td6 = document.createElement('td');
           let td7 = document.createElement('td');
           let td8 = document.createElement('td');
+          let td9 = document.createElement('td');
 
           td1.innerHTML = data[i].Name;
           td2.innerHTML = data[i].Email;
@@ -49,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
           td6.innerHTML = data[i].ManagerID;
           td7.innerHTML = data[i].ContactNumber;
           td8.innerHTML = data[i].Department;
+          td9.innerHTML = data[i].Password;
           
           tr.appendChild(td6);
           tr.appendChild(td1);
@@ -85,15 +87,17 @@ document.addEventListener('DOMContentLoaded', () => {
         td5.addEventListener('click', () => {
             let newName = prompt("Enter new Name:", td1.innerHTML);
             let newEmail = prompt("Enter new Email:", td2.innerHTML);
+            let newPassword = prompt("Enter new Password:", td9.innerHTML);
             let newAddress = prompt("Enter new Address:", td3.innerHTML);
             let newContactNumber = prompt("Enter new Contact Number:", td7.innerHTML);
             let newDepartment = prompt("Enter new Department:", td8.innerHTML);
         
             // Check if all inputs are provided
-            if (newName !== null && newEmail !== null && newAddress !== null && newContactNumber !== null  && newDepartment !== null) {
+            if (newName !== null && newEmail !== null && newPassword != null && newAddress !== null && newContactNumber !== null  && newDepartment !== null) {
                 let updatedManager = {
                     name: newName,
                     email: newEmail,
+                    password:  newPassword,
                     address: newAddress,
                     contactNo: newContactNumber,
                     department: newDepartment
@@ -124,13 +128,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     td3.innerHTML = data.address;
                     td7.innerHTML = data.contactNo;
                     td8.innerHTML = data.department;
+                    td9.innerHTML = data.password;
         
         
-                    alert("Waiter updated successfully");
+                    alert("Manager updated successfully");
                 })
                 .catch(err => {
-                    console.error('Error updating Waiter Record:', err);
-                    alert('Error in updating the Waiter Record');
+                    console.error('Error updating Manager Record:', err);
+                    alert('Error in updating the Manager Record');
                 });
             }
         });
@@ -156,19 +161,20 @@ addManager.addEventListener('click', function(){
   let email = document.getElementById('manager-email').value;
   let contactNo = document.getElementById('manager-contact').value;
   let department = document.getElementById('manager-department').value;
+  let password = document.getElementById('manager-password').value;
 //   console.log(name, address, contactNo);
   fetch('http://localhost:8000/managers', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ name, address, contactNo , email , department
+    body: JSON.stringify({ name, address, contactNo , email , department , password
      })
   })
   .then(response => response.json())
   .then(data => {
-    console.log("Length");
-    alert("Manager added successfully");
+      alert(data["message"]);
+    
   })
   .catch(error => console.error('Error:', error))});
 
