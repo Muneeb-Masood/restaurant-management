@@ -72,9 +72,10 @@ app.put('/customers/:id', (req, res) => {
     const sql = 'UPDATE Customer SET Name = ?, Address = ?, ContactNo = ? WHERE ID = ?';
     db.query(sql, [name, address, contactNo, req.params.id], (err, result) => {
         if (err) throw err;
-        res.send(result);
+        res.send({ name, address, contactNo }); // Send back updated customer data
     });
 });
+
 
 app.delete('/customers/:id', (req, res) => {
     const sq2 = 'DELETE FROM Orders WHERE CustomerID = ?';
@@ -211,25 +212,25 @@ app.get('/managers', (req, res) => {
 });
 
 app.post('/managers', (req, res) => {
-    const { name } = req.body;
-    const sql = 'INSERT INTO Manager (Name) VALUES (?)';
-    db.query(sql, [name], (err, result) => {
+    const {  name, address, contactNo , email , department  } = req.body;
+    const sql = 'INSERT INTO Manager (Name ,  Address , ContactNumber ,Email , Department) VALUES (? , ? , ? , ? , ? )';
+    db.query(sql, [ name, address, contactNo , email , department ], (err, result) => {
         if (err) throw err;
         res.send(result);
     });
 });
 
 app.put('/managers/:id', (req, res) => {
-    const { name } = req.body;
-    const sql = 'UPDATE Manager SET Name = ? WHERE ID = ?';
-    db.query(sql, [name, req.params.id], (err, result) => {
+    const { name, address, contactNo , email , department } = req.body;
+    const sql = 'UPDATE Manager SET Name = ? ,  Address = ? ,ContactNumber = ? , Email = ?   , Department = ? WHERE ManagerID = ?';
+    db.query(sql, [name, address, contactNo , email , department, req.params.id], (err, result) => {
         if (err) throw err;
-        res.send(result);
+        res.send({name , address , contactNo , email , department});
     });
 });
 
 app.delete('/managers/:id', (req, res) => {
-    const sql = 'DELETE FROM Manager WHERE ID = ?';
+    const sql = 'DELETE FROM Manager WHERE ManagerID = ?';
     db.query(sql, [req.params.id], (err, result) => {
         if (err) throw err;
         res.send(result);

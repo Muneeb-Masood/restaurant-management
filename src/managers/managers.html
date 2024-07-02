@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Admin & Dashboard</title>
+  <link rel="stylesheet" href="/src/styles.css">
+ 
+  <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="logo_details">
+      <i class='bx bx-code-alt'></i>
+      <div class="logo_name">
+        RMS
+      </div>
+    </div>
+    <ul>
+      <li>
+        <a href="#" class="active">
+          <i class='bx bx-grid-alt'></i>
+          <span class="links_name">
+            Dashboard
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" id="userAnchorTag">
+          <i class='bx bx-user'></i>
+          <span class="customer-btn">
+            Customers
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" id="feedbackAnchorTag">
+          <i class='bx bxs-truck'></i>
+          <span class="links_name">
+            Feedbacks
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" id="waiterAnchorTag">
+          <i class='bx bx-dollar' ></i>
+          <span class="links_name">
+            Waiters
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" id="chefAnchorTag">
+          <i class='bx bxs-user-plus'></i>
+          <span class="links_name">
+            Chefs
+          </span>
+        </a>
+      </li>
+    
+      <li>
+        <a href="#" id="orderAnchorTag">
+          <i class='bx bx-heart'></i>
+          <span class="links_name">
+            Orders
+          </span>
+        </a>
+      </li>
+      <li>
+        <a href="#" id="billAnchorTag">
+          <i class='bx bx-cog'></i>
+          <span class="links_name">
+            Bills
+          </span>
+        </a>
+      </li>
+
+      <li>
+        <a href="#" id="menuAnchorTag">
+          <i class='bx bx-cog'></i>
+          <span class="links_name">
+            Menus
+          </span>
+        </a>
+      </li>
+
+
+      <li>
+        <a href="#" id="saleAnchorTag">
+          <i class='bx bx-cog'></i>
+          <span class="links_name">
+            Sales
+          </span>
+        </a>
+      </li>
+  
+    </ul>
+  </div>
+  <!-- End Sideber -->
+  <section class="home_section">
+    <div class="topbar">
+      <div class="toggle">
+        <i class='bx bx-menu' id="btn"></i>
+      </div>
+      <div class="system-name" >
+           <h1>RESTAURANT MANAGEMENT SYSTEM</h1>
+      </div>
+      <!-- <div class="user_wrapper">
+        <img src="img/user.jpg" alt="">
+      </div> -->
+    </div>
+    
+    <!-- End Top Bar -->
+  
+    <div class="details">
+        <div class="recent_project">
+          <div class="card_header">
+            <h2>Managers</h2>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <td>Manager ID</td>
+                <td>Name</td>
+                <td>Email</td>
+                <td>Address</td>
+                <td>Contact Number</td>
+                <td>Department</td>
+              </tr>
+            </thead>
+            <tbody>
+              
+            
+            </tbody>
+          </table>
+        </div>
+        <div id="customer-section">
+          <h2>Manager</h2>
+          <form id="customer-form">
+              <input type="text" id="manager-name" placeholder="Name" required>
+              <input type="text" id="manager-email" placeholder="Email" required>
+              <input type="text" id="manager-address" placeholder="Address" required>
+              <input type="text" id="manager-contact" placeholder="Contact No" required>
+              <input type="text" id="manager-department" placeholder="Department" required>
+          
+              <button type="submit" id="addManager">Add Manager</button>
+          </form>
+          <ul id="manager-list"></ul>
+      </div>
+      </div>
+   
+  </section>
+
+ 
+</body>
+
+<script src="/src/index.js"></script>
+<script src="/src/managers/managers.js"></script>
+</html>
