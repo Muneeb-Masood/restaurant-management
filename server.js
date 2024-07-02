@@ -145,6 +145,23 @@ app.get('/order', (req, res) => {
     });
 });
 
+
+app.get('/order/:id', (req, res) => {
+    const sql = 'SELECT * FROM Orders Where OrderNo =' + req.params.id;
+    db.query(sql, (err, results) => {
+        try{
+            if (err){
+                throw err;
+            }
+            res.send(results);
+        }
+        catch(e){
+            console.log("Error ha connection mai");
+            console.log(e);
+        }
+    });
+});
+
 app.post('/order', (req, res) => {
     const {customerID , billID , waiterID , feedbackID, orderStatus } = req.body;
     const sql = 'INSERT INTO Orders (CustomerID, BillID, WaiterID , FeedbackID , OrderStatus) VALUES (?, ?, ?, ? , ?)';
@@ -166,13 +183,27 @@ app.post('/order', (req, res) => {
 
 
 app.put('/order/:id', (req, res) => {
-    const { noOfItems, customerID } = req.body;
-    const sql = 'UPDATE Orders SET NoOfItems = ?, CustomerID = ? WHERE OrderNo = ?';
-    db.query(sql, [noOfItems, customerID, req.params.id], (err, result) => {
-        if (err) throw err;
-        res.send(result);
+    const { customerId, billId, waiterId, feedbackId, orderStatus } = req.body;
+    const sql = 'UPDATE Orders SET CustomerID = ?, BillID = ?, WaiterID = ?, FeedbackID = ?, OrderStatus = ? WHERE OrderNo = ?';
+    
+    db.query(sql, [customerId, billId, waiterId, feedbackId, orderStatus, req.params.id], (err, result) => {
+        if (err) {
+            console.error('Database Error:', err);
+            return res.status(500).send(err);
+        }
+        console.log('Database Update Result:', result);
+
+        // Assuming the update was successful, send back the updated data
+        res.json({
+            customerId,
+            billId,
+            waiterId,
+            feedbackId,
+            orderStatus
+        });
     });
 });
+
 
 app.delete('/order/:id', (req, res) => {
     const sql = 'DELETE FROM Orders WHERE OrderNo = ?';
@@ -191,12 +222,24 @@ app.get('/bills', (req, res) => {
     });
 });
 
+app.get('/bills/:id', (req, res) => {
+    const sql = 'SELECT * FROM Bill Where BillNo = ' + req.params.id;
+    db.query(sql, (err, results) => {
+        if (err) throw err;
+        res.send(results);
+    });
+});
+
+
+
 app.post('/bills', (req, res) => {
     const { billPrice, billStatus  } = req.body;
     const sql = 'INSERT INTO Bill (Price, Status) VALUES (?, ?)';
     db.query(sql, [billPrice , billStatus], (err, result) => {
-        if (err) throw err;
-        res.send(result);
+        if (err){
+            res.send(false)
+        }
+        res.send(true);
     });
 });
 
@@ -277,9 +320,10 @@ app.get('/waiters', (req, res) => {
 
 
 app.get('/waiters/:id', (req, res) => {
-    const sql = 'SELECT * FROM Waiter Wher ID = ' + req.params.id;
+    const sql = 'SELECT * FROM Waiter Where ID = ' + req.params.id;
     db.query(sql, (err, results) => {
         if (err) throw err;
+        console.log(results);
         res.send(results);
     });
 });
@@ -480,6 +524,18 @@ app.put('/menus/:id', (req, res) => {
 
 app.get('/menus', (req, res) => {
     const sql = 'SELECT * FROM Menu';
+    db.query(sql, (err, results) => {
+        if (err) {
+            console.error('Error fetching menu items:', err);
+            res.status(500).send('Error fetching menu items');
+        } else {
+            res.status(200).json(results);
+        }
+    });
+});
+
+app.get('/menus/:id', (req, res) => {
+    const sql = 'SELECT * FROM Menu Where ItemId =' + req.params.id ;
     db.query(sql, (err, results) => {
         if (err) {
             console.error('Error fetching menu items:', err);

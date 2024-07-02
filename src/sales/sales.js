@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let btn6 = document.getElementById("saleAnchorTag");
     let btn7 = document.getElementById("billAnchorTag");
     let btn8 = document.getElementById("menuAnchorTag");
-  
+
     btn.classList.remove("active");
     btn1.classList.remove("active");
     btn2.classList.remove("active");
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn7.classList.remove("active");
     btn8.classList.remove("active");
     dashboard.classList.remove("active");
-  
+
     fetch('http://localhost:8000/daily-sales', {
         method: 'GET',
     })
@@ -28,38 +28,73 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(data => {
         console.log("Fetched Data:", data); // Log the fetched data to check its structure
         responseData = data;
+
+        // Populate the table
         for (let i = 0; i < responseData.length; i++) {
             let tr = document.createElement('tr');
             
             let td1 = document.createElement('td');
             let td2 = document.createElement('td');
-            // let td3 = document.createElement('td');
-            // let td4 = document.createElement('td');
-            // let td5 = document.createElement('td');
-            // let td6 = document.createElement('td');
   
-            td1.innerHTML = responseData[i].sale_date; // Adjusted for both possible cases
-            td2.innerHTML = responseData[i].daily_sales; // Adjusted for both possible cases
-            // td3.innerHTML = responseData[i].ContactNo || responseData[i].contactNo; // Adjusted for both possible cases
-            // td4.innerHTML = "<button>Delete</button>";
-            // td5.innerHTML = "<button>Update</button>";
-            // td6.innerHTML = responseData[i].ID || responseData[i].id; 
-            // Adjusted for both possible cases
+            td1.innerHTML = responseData[i].sale_date;
+            td2.innerHTML = responseData[i].daily_sales;
             
-            // tr.appendChild(td6);
             tr.appendChild(td2);
             tr.appendChild(td1);
-            // tr.appendChild(td3);
-            // tr.appendChild(td4);
-            // tr.appendChild(td5);
-  
-        
   
             let tbody = document.getElementsByTagName("tbody");
             tbody[0].appendChild(tr);
         }
+
+        // Prepare data for the bar chart
+        let labels = responseData.map(item => item.sale_date);
+        let dataValues = responseData.map(item => item.daily_sales);
+
+        // Create the bar chart
+        const ctx = document.getElementById('salesChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Daily Sales',
+                    data: dataValues,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.raw !== null) {
+                                    label += context.raw + ' sales';
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
     })
     .catch(error => console.log('Error in fetching the data:', error));
-  });
-  
- 
+});

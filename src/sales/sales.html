@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="/src/styles.css">
   <!-- box icon -->
   <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="sidebar">
@@ -106,49 +108,41 @@
   
     </ul>
   </div>
-  <!-- End Sideber -->
+  <!-- End Sidebar -->
   <section class="home_section">
     <div class="topbar">
       <div class="toggle">
         <i class='bx bx-menu' id="btn"></i>
       </div>
-      <div class="system-name" >
-           <h1>RESTAURANT MANAGEMENT SYSTEM</h1>
+      <div class="system-name">
+        <h1>RESTAURANT MANAGEMENT SYSTEM</h1>
       </div>
-      <!-- <div class="user_wrapper">
-        <img src="img/user.jpg" alt="">
-      </div> -->
     </div>
-    
     <!-- End Top Bar -->
-  
-    <div class="details">
-        <div class="recent_project">
-          <div class="card_header">
-            <h2>Daily Sales</h2>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <td>Sales</td>
-                <td>Sales Date</td>
-                <!-- <td>Contact Number</td> -->
-              </tr>
-            </thead>
-            <tbody>
-              
-            
-            </tbody>
-          </table>
+
+    <div class="details" id="sales">
+      <div class="recent_project">
+        <div class="card_header">
+          <h2>Daily Sales</h2>
         </div>
-     
+        <table>
+          <thead>
+            <tr>
+              <td>Sales</td>
+              <td>Sales Date</td>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+        <div class="charts">
+          <canvas id="salesChart"></canvas>
+        </div>
       </div>
-   
+    </div>
   </section>
 
- 
+  <script src="/src/index.js"></script>
+  <script src="/src/sales/sales.js"></script>
 </body>
-
-<script src="/src/index.js"></script>
-<script src="/src/sales/sales.js"></script>
 </html>

@@ -1,3 +1,4 @@
+
 // const billCounts = {};
 const billCounts = {
   Paid: 0,
@@ -27,7 +28,29 @@ document.addEventListener('DOMContentLoaded', () => {
     btn8.classList.remove("active");
     dashboard.classList.remove("active");
 
+    document.getElementById('search-btn').addEventListener('click', searchBill);
+    function searchBill() {
+      let searchId = document.getElementById('search-bill-id').value;
+      if (searchId) {
+        fetch(`http://localhost:8000/bills/${searchId}`, {
+          method: 'GET',
+        })
+        .then(response => response.json())
+        .then(data1 => {
+          console.log(data1.length);
+          if (data1.length > 0) {
   
+              renderOrders(data1);
+  
+              } else {
+            alert('No Bill found with the provided ID');
+          }
+        })
+        .catch(error => console.log('Error in searching the Bill:', error));
+      } else {
+        alert('Please enter a Bill ID to search');
+      }
+    }
   let tbody = document.getElementsByTagName("tbody")[0];
 
   // Fetch order data and render it
@@ -72,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
             })
             .then(response => response.json())
             .then(data => {
-                alert("Bill deleted successfully with id " + data);
+                alert("Bill deleted successfully");
                 tr.remove();
             })
             .catch(err => {
@@ -201,7 +224,7 @@ addBill.addEventListener('click', function(){
   })
   .then(response =>     {
     console.log(response);
-    if(response == true){
+    if(response){
       alert("Bill added successfully")
     }
     else{
@@ -211,6 +234,6 @@ addBill.addEventListener('click', function(){
 )
   
   .catch(error => {
-    alert("This Customer is new so first add Customers Details");
+    // alert("This Customer is new so first add Customers Details" + response);
     // window.location.href = "http://localhost:5501/src/customers/customers.html"
   })});

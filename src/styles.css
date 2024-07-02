@@ -266,6 +266,10 @@
   grid-gap: 20px;
 }
 
+#sales{
+  width: 100%;
+}
+
 .details .recent_project,
 .details .recent_customers {
   position: relative;

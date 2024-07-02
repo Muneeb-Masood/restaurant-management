@@ -125,15 +125,21 @@
     <div class="details">
         <div class="recent_project">
           <div class="card_header">
-            <h2>Lastet Projects</h2>
+            <h2>Waiters</h2>
+            <div class="search_wrapper">
+              <input type="text" id="search-waiter-id" placeholder="Search by Waiter ID">
+              <button id="search-btn">Search</button>
+            </div>
           </div>
           <table>
             <thead>
               <tr>
-                <td>Project Name</td>
-                <td>Hours</td>
-                <td>Priority</td>
-                <td>Members</td>
+                <td>Waiters ID</td>
+                <td>Name</td>
+                <td>Role</td>
+                <td>Email</td>
+                <td>Address</td>
+                <td>Shift</td>
               </tr>
             </thead>
             <tbody>
@@ -144,10 +150,7 @@
         </div>
         <div id="customer-section">
           <h2>Waiters</h2>
-          <div class="search_wrapper">
-            <input type="text" id="search-waiter-id" placeholder="Search by Waiter ID">
-            <button id="search-btn">Search</button>
-          </div>
+      
           <form id="customer-form">
               <input type="text" id="waiter-name" placeholder="Name" required>
               <input type="text" id="waiter-role" placeholder="Role" required>
