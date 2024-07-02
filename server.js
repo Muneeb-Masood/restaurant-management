@@ -48,6 +48,21 @@ app.get('/customers', (req, res) => {
     });
 });
 
+
+
+app.get('/customers/:id', (req, res) => {
+    console.log("Custumer k doara get request bheji gaie ha");
+    const sql = 'SELECT * FROM Customer WHERE ID = ' + req.params.id;
+    db.query(sql, (err, results) => {
+        if (err) throw err;
+
+            res.send(results);
+        
+
+
+ 
+})});
+
 app.post('/customers', (req, res) => {
     console.log("Post ki request aie ha...");
     const { name, address, contactNo } = req.body;
@@ -211,6 +226,16 @@ app.get('/managers', (req, res) => {
     });
 });
 
+
+
+
+app.get('/managers/:id', (req, res) => {
+    const sql = 'SELECT * FROM Manager WHERE ManagerID = ' + req.params.id;
+    db.query(sql, (err, results) => {
+        if (err) throw err;
+        res.send(results);
+    });
+});
 app.post('/managers', (req, res) => {
     const {  name, address, contactNo , email , department , password } = req.body;
     const sql = 'INSERT INTO Manager (Name ,  Address , ContactNumber ,Email , Department , Password) VALUES (? , ? , ? , ? , ? , ? )';
@@ -250,6 +275,17 @@ app.get('/waiters', (req, res) => {
 });
 
 
+
+app.get('/waiters/:id', (req, res) => {
+    const sql = 'SELECT * FROM Waiter Wher ID = ' + req.params.id;
+    db.query(sql, (err, results) => {
+        if (err) throw err;
+        res.send(results);
+    });
+});
+
+
+
 app.put('/waiters/:id', (req, res) => {
     console.log("Update ki req aie ha on waiters");
     const { name, role, email, address, shift } = req.body;
@@ -287,6 +323,14 @@ app.delete('/waiters/:id', (req, res) => {
 // CRUD operations for Chef
 app.get('/chefs', (req, res) => {
     const sql = 'SELECT * FROM Chef';
+    db.query(sql, (err, results) => {
+        if (err) throw err;
+        res.send(results);
+    });
+});
+
+app.get('/chefs/:id', (req, res) => {
+    const sql = 'SELECT * FROM Chef WHERE ID = ' + req.params.id;
     db.query(sql, (err, results) => {
         if (err) throw err;
         res.send(results);

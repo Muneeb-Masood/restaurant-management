@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btn7.classList.remove("active");
     btn8.classList.remove("active");
     dashboard.classList.remove("active");
+    document.getElementById('search-btn').addEventListener('click', searchChef);
 
 
   let responseData;
@@ -149,6 +150,28 @@ document.addEventListener('DOMContentLoaded', () => {
       }
   }
 
+  function searchChef() {
+    let searchId = document.getElementById('search-chef-id').value;
+    if (searchId) {
+      fetch(`http://localhost:8000/chefs/${searchId}`, {
+        method: 'GET',
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        if (data.length > 0) {
+
+renderChefs(data);
+        } else {
+          alert('No chef found with the provided ID');
+        }
+      })
+      .catch(error => console.log('Error in searching the chef:', error));
+    } else {
+      alert('Please enter a chef ID to search');
+    }
+  }
+
   // Initial fetch and render on page load
   fetchAndRenderChefs();
 });
@@ -192,3 +215,4 @@ addChef.addEventListener('click', function(){
 //   window.location.href = "http://localhost:5500/src/chefs/chefs.html"
 // }
 // )
+
