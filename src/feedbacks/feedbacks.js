@@ -1,4 +1,29 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+ let dashboard = document.getElementById("Dashboard");
+    let btn = document.getElementById("userAnchorTag");
+    let btn1 = document.getElementById("chefAnchorTag");
+    let btn2 = document.getElementById("waiterAnchorTag");
+    let btn3 = document.getElementById("feedbackAnchorTag");
+    let btn4 = document.getElementById("managerAnchorTag");
+    let btn5 = document.getElementById("orderAnchorTag");
+    let btn6 = document.getElementById("saleAnchorTag");
+    let btn7 = document.getElementById("billAnchorTag");
+    let btn8 = document.getElementById("menuAnchorTag");
+
+
+    btn.classList.remove("active");
+      btn1.classList.remove("active");
+      btn2.classList.remove("active");
+      btn3.classList.add("active");
+      btn4.classList.remove("active");
+      btn5.classList.remove("active");
+      btn6.classList.remove("active");
+      btn7.classList.remove("active");
+      btn8.classList.remove("active");
+      dashboard.classList.remove("active");
+
+
   const ratingFilter = document.getElementById('ratingFilter');
   let tbody = document.getElementsByTagName("tbody")[0];
 
@@ -77,8 +102,5 @@ document.addEventListener('DOMContentLoaded', () => {
     .catch(error => console.error('Error fetching feedback stats:', error));
 
   // Add event listener for navigating to the customer page
-  let btn = document.getElementById("userAnchorTag");
-  btn.addEventListener("click", () => {
-    window.location.href = "http://localhost:5500/src/customers/customers.html";
-  });
+
 });

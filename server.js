@@ -333,7 +333,7 @@ app.delete('/chefs/:id', (req, res) => {
 
 app.post('/login', (req, res) => {
     const { email, password } = req.body;
-    const sql = 'SELECT * FROM Users WHERE email = ?';
+    const sql = 'SELECT * FROM Manager WHERE email = ?';
     
     db.query(sql, [email], (err, results) => {
         if (err) throw err;

@@ -1,6 +1,31 @@
 let responseData;
 document.addEventListener('DOMContentLoaded', () => {
 
+
+    let dashboard = document.getElementById("Dashboard");
+    let btn = document.getElementById("userAnchorTag");
+    let btn1 = document.getElementById("chefAnchorTag");
+    let btn2 = document.getElementById("waiterAnchorTag");
+    let btn3 = document.getElementById("feedbackAnchorTag");
+    let btn4 = document.getElementById("managerAnchorTag");
+    let btn5 = document.getElementById("orderAnchorTag");
+    let btn6 = document.getElementById("saleAnchorTag");
+    let btn7 = document.getElementById("billAnchorTag");
+    let btn8 = document.getElementById("menuAnchorTag");
+
+    btn.classList.remove("active");
+    btn1.classList.remove("active");
+    btn2.classList.remove("active");
+    btn3.classList.remove("active");
+    btn4.classList.remove("active");
+    btn5.classList.remove("active");
+    btn6.classList.remove("active");
+    btn7.classList.remove("active");
+    btn8.classList.add("active");
+    dashboard.classList.remove("active");
+
+
+
   fetch('http://localhost:8000/menus', {
       method: 'GET',
   })
